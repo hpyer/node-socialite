@@ -1,0 +1,34 @@
+{
+  "name": "node-socialite",
+  "version": "1.0.0",
+  "description": "Socialite is an OAuth2 authentication tool for Node.js",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "rm -rf dist && tsc && cp -r src/Types dist/",
+    "test": "mocha ./test/**/*.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:hpyer/node-socialite.git"
+  },
+  "keywords": [
+    "oauth2",
+    "oauth2-authentication",
+    "socialite",
+    "social-login",
+    "github",
+    "wechat",
+    "wework"
+  ],
+  "author": "Hpyer",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^14.14.31",
+    "mocha": "^8.3.0",
+    "sinon": "^9.2.4"
+  },
+  "dependencies": {
+    "axios": "^0.21.1",
+    "qs": "^6.9.6"
+  }
+}
