@@ -84,7 +84,7 @@ let config = {
 
 #### 自定义应用名
 
-如果您需要管理同一个服务商的不同应用，可以将配置对的键名设置为任意名称，如：`foo`。但是在使用别名后，您必须在配置中增加一个 `provider` 参数，以告诉工具包改配置使用的是哪个服务商。
+如果您需要管理同一个服务商的不同应用，可以将配置对的键名设置为任意名称，如：`foo`。但是在使用别名后，您必须在配置中增加一个 `provider` 参数，以告诉工具包该配置使用的是哪个服务商。
 
 ```js
 let config = {
@@ -169,7 +169,7 @@ let manager = new SocialiteManager(config);
 
 // 参数1: 自定义服务商标识
 // 参数2: 生成并返回 MyProvider 实例回调函数。需接收一个该服务商对应配置的参数，即 config.foo 的值
-manager3.extend('myprovider', function (cfg) {
+manager.extend('myprovider', function (cfg) {
   return new MyProvider(cfg);
 });
 
@@ -180,7 +180,7 @@ let myprovider = manager.create('foo');
 // 方法二：直接用类名做为 provider 参数
 let config = {
   bar: {
-    provider: TestCustomProvider,
+    provider: MyProvider,
     client_id: 'foo-app-id',
     client_secret: 'foo-app-secret',
     redirect: 'http://example.com/socialite/foo-callback',
