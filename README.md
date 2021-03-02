@@ -1,6 +1,8 @@
 
 ## Socialite is an OAuth2 authentication tool for Node.js
 
+[![Build Status](https://travis-ci.com/hpyer/node-socialite.svg?branch=master)](https://travis-ci.com/hpyer/node-socialite) [![npm](https://img.shields.io/npm/v/node-socialite.svg)](https://www.npmjs.com/package/node-socialite) [![License](https://img.shields.io/npm/l/node-socialite.svg)](LICENSE)
+
 [Socialite](https://github.com/overtrue/socialite) 是一个由 `安正超` 大神用 PHP 开发的开源的 Oauth2 认证工具包。本项目是 Socialite 包在 Node.js 上的实现，并且基本还原了PHP版的配置项以及接口的调用方式。
 
 > 注：虽然也使用了 Socialite 这个名称，但是 `安正超` 大神并未参与开发，请各位开发者不要因使用本包产生的疑惑而去打扰大神，如有疑问请在本项目中提 issue，谢谢~
