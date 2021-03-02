@@ -28,6 +28,9 @@ export default class SocialiteManager
     this.config = new Config(config);
   }
 
+  create(name: 'github'): Github;
+  create(name: 'wechat'): WeChat;
+  create(name: 'wework'): WeWork;
   create(name: string): ProviderInterface
   {
     name = name.toLowerCase();

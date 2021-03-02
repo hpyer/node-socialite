@@ -1,25 +1,25 @@
 
 import ProviderInterface from '../Core/ProviderInterface';
 
-export interface ProviderConstructable {
+export declare interface ProviderConstructable {
   new(config: object): ProviderInterface;
 }
 
 /**
  * 本工具支持的服务商映射表，键名为服务商标识，键值为服务商类
  */
-export interface SupportProviders {
+export declare interface SupportProviders {
   [key: string]: ProviderConstructable;
 }
 
 /**
  * 已解析的服务商映射表，键名为服务商标识，键值为服务商实例
  */
-export interface ResolvedProviders {
+export declare interface ResolvedProviders {
   [key: string]: ProviderInterface;
 }
 
-export interface ProviderConfig {
+export declare interface ProviderConfig {
   /**
    * 服务商，支持3种方法
    *
@@ -65,19 +65,19 @@ export interface ProviderConfig {
  * 键名为服务商的标识，如果需要管理同一个服务商的不同应用，
  * 则键名可以用作别名，但同时配置中的 provider 属性必填
  */
-export interface SocialiteConfig {
+export declare interface SocialiteConfig {
   [key: string]: ProviderConfig;
 }
 
 /**
  * 自定义服务商创建方法映射表，键名为服务商标识，键值为对应的创建方法
  */
-export interface CustomProviderCreators {
+export declare interface CustomProviderCreators {
   [key: string]: ProviderCreator;
 }
 
 /**
  * 服务商创建方法
  */
-export type ProviderCreator = (ProviderConfig) => ProviderInterface;
+export declare type ProviderCreator = (ProviderConfig) => ProviderInterface;
 
