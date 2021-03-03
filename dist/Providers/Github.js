@@ -18,7 +18,6 @@ const Utils_1 = require("../Core/Utils");
 class Github extends ProviderInterface_1.default {
     constructor() {
         super(...arguments);
-        this.NAME = 'github';
         this._scopes = ['read:user'];
     }
     getAuthUrl() {
@@ -78,3 +77,4 @@ class Github extends ProviderInterface_1.default {
     }
 }
 exports.default = Github;
+Github.NAME = 'github';

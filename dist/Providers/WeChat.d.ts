@@ -1,7 +1,7 @@
 import ProviderInterface from "../Core/ProviderInterface";
 import User from "../Core/User";
 export default class WeChat extends ProviderInterface {
-    NAME: string;
+    static NAME: string;
     protected _scopes: string[];
     protected _baseUrl: string;
     protected _withCountryCode: boolean;

@@ -17,10 +17,6 @@ const Config_1 = __importDefault(require("../Core/Config"));
 const Utils_1 = require("../Core/Utils");
 class ProviderInterface {
     constructor(config) {
-        /**
-         * 供应商标识
-         */
-        this.NAME = '';
         this._config = null;
         this._state = '';
         this._redirectUrl = '';
@@ -174,7 +170,7 @@ class ProviderInterface {
         return __awaiter(this, void 0, void 0, function* () {
             let user = yield this.getUserByToken(token);
             return this.mapUserToObject(user)
-                .setProvider(this.NAME)
+                .setProvider(this.constructor.NAME)
                 .setRaw(user)
                 .setAccessToken(token);
         });
@@ -195,3 +191,7 @@ class ProviderInterface {
     }
 }
 exports.default = ProviderInterface;
+/**
+ * 供应商标识
+ */
+ProviderInterface.NAME = '';

@@ -18,7 +18,6 @@ const Utils_1 = require("../Core/Utils");
 class WeChat extends ProviderInterface_1.default {
     constructor(config) {
         super(config);
-        this.NAME = 'wechat';
         this._scopes = ['snsapi_login'];
         this._baseUrl = 'https://api.weixin.qq.com/sns';
         this._withCountryCode = false;
@@ -172,3 +171,4 @@ class WeChat extends ProviderInterface_1.default {
     }
 }
 exports.default = WeChat;
+WeChat.NAME = 'wechat';

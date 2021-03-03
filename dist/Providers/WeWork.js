@@ -18,7 +18,6 @@ const Utils_1 = require("../Core/Utils");
 class WeWork extends ProviderInterface_1.default {
     constructor() {
         super(...arguments);
-        this.NAME = 'wework';
         this._detailed = false;
         this._agentId = null;
         this._apiAccessToken = '';
@@ -43,7 +42,7 @@ class WeWork extends ProviderInterface_1.default {
                 user = yield this.getUserById(user['UserId']);
             }
             return this.mapUserToObject(user)
-                .setProvider(this.NAME)
+                .setProvider(WeWork.NAME)
                 .setRaw(user);
         });
     }
@@ -165,3 +164,4 @@ class WeWork extends ProviderInterface_1.default {
     }
 }
 exports.default = WeWork;
+WeWork.NAME = 'wework';

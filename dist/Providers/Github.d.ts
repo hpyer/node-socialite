@@ -1,7 +1,7 @@
 import ProviderInterface from "../Core/ProviderInterface";
 import User from "../Core/User";
 export default class Github extends ProviderInterface {
-    NAME: string;
+    static NAME: string;
     protected _scopes: string[];
     protected getAuthUrl(): string;
     protected getTokenUrl(): string;

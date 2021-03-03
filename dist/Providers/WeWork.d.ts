@@ -1,7 +1,7 @@
 import ProviderInterface from "../Core/ProviderInterface";
 import User from "../Core/User";
 export default class WeWork extends ProviderInterface {
-    NAME: string;
+    static NAME: string;
     protected _detailed: boolean;
     protected _agentId: number;
     protected _apiAccessToken: string;

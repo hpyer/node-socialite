@@ -6,7 +6,7 @@ export default abstract class ProviderInterface {
     /**
      * 供应商标识
      */
-    NAME: string;
+    static NAME: string;
     protected _config: Config;
     protected _state: string;
     protected _redirectUrl: string;

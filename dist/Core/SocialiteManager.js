@@ -14,9 +14,9 @@ class SocialiteManager {
         this.resolved = {};
         this.customCreators = {};
         this.providers = {
-            github: Github_1.default,
-            wechat: WeChat_1.default,
-            wework: WeWork_1.default,
+            [Github_1.default.NAME]: Github_1.default,
+            [WeChat_1.default.NAME]: WeChat_1.default,
+            [WeWork_1.default.NAME]: WeWork_1.default,
         };
         this.config = new Config_1.default(config);
     }

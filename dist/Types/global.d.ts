@@ -52,7 +52,7 @@ export declare interface ProviderConfig {
   /**
    * 应用回调地址，与 redirect 二者必须填写一个
    */
-  redirect_url: string;
+  redirect_url?: string;
   /**
    * 应用回调地址，与 redirect_url 二者必须填写一个
    */
