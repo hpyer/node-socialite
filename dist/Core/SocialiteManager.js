@@ -8,6 +8,7 @@ const ProviderInterface_1 = __importDefault(require("./ProviderInterface"));
 const Github_1 = __importDefault(require("../Providers/Github"));
 const WeChat_1 = __importDefault(require("../Providers/WeChat"));
 const WeWork_1 = __importDefault(require("../Providers/WeWork"));
+const Weibo_1 = __importDefault(require("../Providers/Weibo"));
 class SocialiteManager {
     constructor(config) {
         this.config = null;
@@ -17,6 +18,7 @@ class SocialiteManager {
             [Github_1.default.NAME]: Github_1.default,
             [WeChat_1.default.NAME]: WeChat_1.default,
             [WeWork_1.default.NAME]: WeWork_1.default,
+            [Weibo_1.default.NAME]: Weibo_1.default,
         };
         this.config = new Config_1.default(config);
     }
