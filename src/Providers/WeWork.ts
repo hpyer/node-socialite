@@ -6,7 +6,7 @@ import { buildQueryString } from "../Core/Utils";
 
 export default class WeWork extends ProviderInterface
 {
-  public NAME: string = 'wework';
+  public static NAME: string = 'wework';
   protected _detailed: boolean = false;
   protected _agentId: number = null;
   protected _apiAccessToken: string = '';
@@ -37,7 +37,7 @@ export default class WeWork extends ProviderInterface
       user = await this.getUserById(user['UserId']);
     }
     return this.mapUserToObject(user)
-      .setProvider(this.NAME)
+      .setProvider(WeWork.NAME)
       .setRaw(user);
   }
 

@@ -6,7 +6,7 @@ import { inArray } from "../Core/Utils";
 
 export default class Github extends ProviderInterface
 {
-  public NAME: string = 'github';
+  public static NAME: string = 'github';
   protected _scopes: string[] = ['read:user'];
 
 

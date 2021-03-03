@@ -6,7 +6,7 @@ import { inArray, buildQueryString, merge } from "../Core/Utils";
 
 export default class WeChat extends ProviderInterface
 {
-  public NAME: string = 'wechat';
+  public static NAME: string = 'wechat';
   protected _scopes: string[] = ['snsapi_login'];
   protected _baseUrl: string = 'https://api.weixin.qq.com/sns';
   protected _withCountryCode: boolean = false;

@@ -13,9 +13,9 @@ export default class SocialiteManager
   protected resolved: ResolvedProviders = {};
   protected customCreators: CustomProviderCreators = {};
   protected providers: SupportProviders = {
-    github: Github,
-    wechat: WeChat,
-    wework: WeWork,
+    [Github.NAME]: Github,
+    [WeChat.NAME]: WeChat,
+    [WeWork.NAME]: WeWork,
   };
 
   constructor(config: SocialiteConfig)

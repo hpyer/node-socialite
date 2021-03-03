@@ -11,7 +11,7 @@ export default abstract class ProviderInterface
   /**
    * 供应商标识
    */
-  public NAME: string = '';
+  public static NAME: string = '';
 
   protected _config: Config = null;
   protected _state: string = '';
@@ -232,7 +232,7 @@ export default abstract class ProviderInterface
     let user = await this.getUserByToken(token);
 
     return this.mapUserToObject(user)
-      .setProvider(this.NAME)
+      .setProvider((this.constructor as typeof ProviderInterface).NAME)
       .setRaw(user)
       .setAccessToken(token);
   }
