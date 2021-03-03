@@ -18,7 +18,8 @@
     "social-login",
     "github",
     "wechat",
-    "wework"
+    "wework",
+    "weibo"
   ],
   "author": "Hpyer",
   "license": "MIT",
