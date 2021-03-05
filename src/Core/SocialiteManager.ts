@@ -7,6 +7,7 @@ import Github from "../Providers/Github";
 import WeChat from "../Providers/WeChat";
 import WeWork from "../Providers/WeWork";
 import Weibo from "../Providers/Weibo";
+import QQ from "../Providers/QQ";
 
 export default class SocialiteManager
 {
@@ -18,6 +19,7 @@ export default class SocialiteManager
     [WeChat.NAME]: WeChat,
     [WeWork.NAME]: WeWork,
     [Weibo.NAME]: Weibo,
+    [QQ.NAME]: QQ,
   };
 
   constructor(config: SocialiteConfig)
@@ -34,6 +36,7 @@ export default class SocialiteManager
   create(name: 'wechat'): WeChat;
   create(name: 'wework'): WeWork;
   create(name: 'weibo'): Weibo;
+  create(name: 'qq'): QQ;
   create(name: string): ProviderInterface
   {
     name = name.toLowerCase();
