@@ -72,5 +72,14 @@ export default abstract class ProviderInterface {
      * @param token 授权后的code
      */
     userFromToken(token: string): Promise<User>;
-    protected normalizeAccessTokenResponse(response: AxiosResponse): object;
+    /**
+     * 判断是否 AxiosResponse
+     * @param response
+     */
+    protected isAxiosResponse(response: any): response is AxiosResponse;
+    /**
+     * 格式化 AccessToken 对象，确保可以通过 access_token, refresh_token, expires_in 三个属性访问
+     * @param response
+     */
+    protected normalizeAccessTokenResponse(response: AxiosResponse | object | string): object;
 }

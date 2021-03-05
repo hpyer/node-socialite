@@ -175,11 +175,36 @@ class ProviderInterface {
                 .setAccessToken(token);
         });
     }
+    /**
+     * 判断是否 AxiosResponse
+     * @param response
+     */
+    isAxiosResponse(response) {
+        return typeof response.status != 'undefined'
+            && typeof response.data != 'undefined'
+            && typeof response.headers != 'undefined';
+    }
+    /**
+     * 格式化 AccessToken 对象，确保可以通过 access_token, refresh_token, expires_in 三个属性访问
+     * @param response
+     */
     normalizeAccessTokenResponse(response) {
-        if (response.status != 200) {
-            throw new Error('Remote server responsed with wrong code: ' + response.status);
+        let data = null;
+        if (this.isAxiosResponse(response)) {
+            if (response.status != 200) {
+                throw new Error('Remote server responsed with wrong code: ' + response.status);
+            }
+            data = response.data;
         }
-        let data = response.data;
+        else if (typeof response == 'string') {
+            try {
+                data = JSON.parse(response);
+            }
+            catch (e) { }
+        }
+        else if (typeof response == 'object') {
+            data = response;
+        }
         if (!data || !data[this._accessTokenKey]) {
             throw new Error('Authorize Failed: ' + JSON.stringify(data));
         }
