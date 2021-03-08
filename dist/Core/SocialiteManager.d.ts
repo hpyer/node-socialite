@@ -6,6 +6,7 @@ import WeChat from "../Providers/WeChat";
 import WeWork from "../Providers/WeWork";
 import Weibo from "../Providers/Weibo";
 import QQ from "../Providers/QQ";
+import DouYin from "../Providers/DouYin";
 export default class SocialiteManager {
     protected config: Config;
     protected resolved: ResolvedProviders;
@@ -18,6 +19,7 @@ export default class SocialiteManager {
     create(name: 'wework'): WeWork;
     create(name: 'weibo'): Weibo;
     create(name: 'qq'): QQ;
+    create(name: 'douyin'): DouYin;
     createProvider(name: string): ProviderInterface;
     buildProvider(provider: ProviderConstructable, config: ProviderConfig): ProviderInterface;
     callCustomCreator(provider: string, config: ProviderConfig): ProviderInterface;
