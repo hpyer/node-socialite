@@ -61,12 +61,14 @@ export default class DouYin extends ProviderInterface
       responseType: 'json',
     });
 
+    this.withOpenId(response.data.openid);
+
     return this.normalizeAccessTokenResponse(response);
   }
 
   protected async getUserByToken(token: string): Promise<object>
   {
-    if (this._openId) {
+    if (!this._openId) {
       throw new Error('Please set open_id before your query.');
     }
 

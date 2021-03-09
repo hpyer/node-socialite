@@ -61,12 +61,13 @@ class DouYin extends ProviderInterface_1.default {
                 params: params,
                 responseType: 'json',
             });
+            this.withOpenId(response.data.openid);
             return this.normalizeAccessTokenResponse(response);
         });
     }
     getUserByToken(token) {
         return __awaiter(this, void 0, void 0, function* () {
-            if (this._openId) {
+            if (!this._openId) {
                 throw new Error('Please set open_id before your query.');
             }
             let response = yield this.doRequest({
