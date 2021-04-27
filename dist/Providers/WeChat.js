@@ -23,36 +23,34 @@ class WeChat extends ProviderInterface_1.default {
         this._withCountryCode = false;
         this._component = null;
         this._openid = '';
-        this.prepareForComponent();
-    }
-    prepareForComponent() {
-        if (!this.getConfig().has('component')) {
-            return;
+        if (this.getConfig().has('component')) {
+            this._scopes = ['snsapi_base'];
+            this.prepareForComponent(this.getConfig().get('component'));
         }
+    }
+    prepareForComponent(componentConfig) {
         let config = {
             id: undefined,
             token: undefined,
         };
-        let component = this.getConfig().get('component');
-        for (let key in component) {
+        for (let key in componentConfig) {
             switch (key) {
                 case 'id':
                 case 'app_id':
                 case 'component_app_id':
-                    config.id = component[key];
+                    config.id = componentConfig[key];
                     break;
                 case 'token':
                 case 'app_token':
                 case 'access_token':
                 case 'component_access_token':
-                    config.token = component[key];
+                    config.token = componentConfig[key];
                     break;
             }
         }
         if (config.id == undefined || config.token == undefined) {
             throw new Error('Please check your config arguments is available.');
         }
-        this._scopes = ['snsapi_base'];
         this._component = config;
     }
     withOpenid(openid) {
@@ -62,6 +60,13 @@ class WeChat extends ProviderInterface_1.default {
     withCountryCode() {
         this._withCountryCode = true;
         return this;
+    }
+    withComponent(componentConfig) {
+        this.prepareForComponent(componentConfig);
+        return this;
+    }
+    getComponent() {
+        return this._component;
     }
     tokenFromCode(code) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -84,8 +89,8 @@ class WeChat extends ProviderInterface_1.default {
         if (this._component) {
             return {
                 appid: this.getClientId(),
-                component_appid: this._component['id'],
-                component_access_token: this._component['token'],
+                component_appid: this._component.id,
+                component_access_token: this._component.token,
                 code,
                 grant_type: 'authorization_code',
             };
@@ -111,7 +116,7 @@ class WeChat extends ProviderInterface_1.default {
     getCodeFields() {
         if (this._component) {
             this.with(Utils_1.merge(this._parameters, {
-                component_appid: this._component['id'],
+                component_appid: this._component.id,
             }));
         }
         let fields = Utils_1.merge({

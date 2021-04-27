@@ -81,3 +81,24 @@ export declare interface CustomProviderCreators {
  */
 export declare type ProviderCreator = (ProviderConfig) => ProviderInterface;
 
+/**
+ * 微信组件配置
+ */
+export declare interface WechatComponent {
+  id: string;
+  token: string;
+}
+
+/**
+ * 微信组件配置选项
+ */
+export declare interface WechatComponentConfig {
+  id?: string;
+  app_id?: string;
+  component_app_id?: string;
+
+  token?: string;
+  app_token?: string;
+  access_token?: string;
+  component_access_token?: string;
+}
