@@ -4,6 +4,9 @@ import ProviderInterface from "../Core/ProviderInterface";
 import User from "../Core/User";
 import { buildQueryString } from "../Core/Utils";
 
+/**
+ * @see [网页授权登录](https://work.weixin.qq.com/api/doc/90000/90135/91020)
+ */
 export default class WeWork extends ProviderInterface
 {
   public static NAME: string = 'wework';

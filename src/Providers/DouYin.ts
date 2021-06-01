@@ -4,6 +4,9 @@ import ProviderInterface from "../Core/ProviderInterface";
 import User from "../Core/User";
 import { merge } from "../Core/Utils";
 
+/**
+ * @see [WEB 授权说明](https://open.douyin.com/platform/doc/6852243568711583752)
+ */
 export default class DouYin extends ProviderInterface
 {
   public static NAME: string = 'douyin';
