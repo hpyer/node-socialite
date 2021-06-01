@@ -28,7 +28,7 @@ class TestUnit extends BaseProviderTest {
 
       this.mockResponseMulti([
         {
-          openid: 'fake-openid',
+          open_id: 'fake-openid',
           access_token: 'fake-access-token',
           refresh_token: 'fake-refresh-token',
           expires_in: 7200,
