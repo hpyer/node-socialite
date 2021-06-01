@@ -61,11 +61,11 @@ class DouYin extends ProviderInterface_1.default {
                 params: params,
                 responseType: 'json',
             });
-            if (!response.data || response.data.error_code != 0) {
+            if (!response.data.data || response.data.data.error_code != 0) {
                 throw new Error('Invalid token response: ' + JSON.stringify(response.data));
             }
-            this.withOpenId(response.data.open_id);
-            return this.normalizeAccessTokenResponse(response);
+            this.withOpenId(response.data.data.open_id);
+            return this.normalizeAccessTokenResponse(response.data.data);
         });
     }
     getUserByToken(token) {
@@ -81,7 +81,7 @@ class DouYin extends ProviderInterface_1.default {
                     access_token: token,
                 }
             });
-            return response.data || {};
+            return response.data.data || {};
         });
     }
     mapUserToObject(user) {
@@ -89,7 +89,7 @@ class DouYin extends ProviderInterface_1.default {
             id: user['open_id'] || null,
             nickname: user['nickname'] || null,
             name: user['nickname'] || null,
-            email: user['email'] || null,
+            email: null,
             avatar: user['avatar'] || null,
         });
     }

@@ -22,33 +22,48 @@ class TestUnit extends BaseProviderTest {
       this.assert.strictEqual(url, 'https://open.douyin.com/platform/oauth/connect/?client_key=douyin-app-id&redirect_uri=http%3A%2F%2Ftest.com%2Fsocialite%2Fcallback&scope=test_scope&response_type=code');
     });
 
-    it(`Should fetch user(with email) from code`, async () => {
+    it(`Should fetch user from code`, async () => {
 
       this.mockRest();
 
       this.mockResponseMulti([
         {
-          open_id: 'fake-openid',
-          access_token: 'fake-access-token',
-          refresh_token: 'fake-refresh-token',
-          expires_in: 7200,
+          "data": {
+            "access_token": "access_token",
+            "description": "",
+            "error_code": "0",
+            "expires_in": "86400",
+            "open_id": "aaa-bbb-ccc",
+            "refresh_expires_in": "86400",
+            "refresh_token": "refresh_token",
+            "scope": "user_info"
+          },
+          "message": "<nil>"
         },
         {
-          open_id: 'fake-id',
-          nickname: 'fake-nickname',
-          email: 'fake-email',
-          avatar: 'fake-avatar',
+          "data": {
+            "avatar": "https://example.com/x.jpeg",
+            "city": "上海",
+            "country": "中国",
+            "description": "",
+            "e_account_role": "<nil>",
+            "error_code": "0",
+            "gender": "<nil>",
+            "nickname": "张伟",
+            "open_id": "0da22181-d833-447f-995f-1beefea5bef3",
+            "province": "上海",
+            "union_id": "1ad4e099-4a0c-47d1-a410-bffb4f2f64a4"
+          }
         },
       ]);
       let user = await douyin.userFromCode('123456');
 
-      this.assert.strictEqual(user.id, 'fake-id');
-      this.assert.strictEqual(user.nickname, 'fake-nickname');
-      this.assert.strictEqual(user.name, 'fake-nickname');
-      this.assert.strictEqual(user.email, 'fake-email');
-      this.assert.strictEqual(user.avatar, 'fake-avatar');
-      this.assert.strictEqual(user.access_token, 'fake-access-token');
-      this.assert.strictEqual(user.refresh_token, 'fake-refresh-token');
+      this.assert.strictEqual(user.id, '0da22181-d833-447f-995f-1beefea5bef3');
+      this.assert.strictEqual(user.nickname, '张伟');
+      this.assert.strictEqual(user.name, '张伟');
+      this.assert.strictEqual(user.avatar, 'https://example.com/x.jpeg');
+      this.assert.strictEqual(user.access_token, 'access_token');
+      this.assert.strictEqual(user.refresh_token, 'refresh_token');
     });
 
   }

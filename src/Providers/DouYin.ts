@@ -61,13 +61,13 @@ export default class DouYin extends ProviderInterface
       responseType: 'json',
     });
 
-    if (!response.data || response.data.error_code != 0) {
+    if (!response.data.data || response.data.data.error_code != 0) {
       throw new Error('Invalid token response: ' + JSON.stringify(response.data));
     }
 
-    this.withOpenId(response.data.open_id);
+    this.withOpenId(response.data.data.open_id);
 
-    return this.normalizeAccessTokenResponse(response);
+    return this.normalizeAccessTokenResponse(response.data.data);
   }
 
   protected async getUserByToken(token: string): Promise<object>
@@ -84,7 +84,7 @@ export default class DouYin extends ProviderInterface
         access_token: token,
       }
     });
-    return response.data || {};
+    return response.data.data || {};
   }
 
   protected mapUserToObject(user: object): User
@@ -93,7 +93,7 @@ export default class DouYin extends ProviderInterface
       id: user['open_id'] || null,
       nickname: user['nickname'] || null,
       name: user['nickname'] || null,
-      email: user['email'] || null,
+      email: null,
       avatar: user['avatar'] || null,
     });
   }
