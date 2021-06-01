@@ -61,7 +61,10 @@ class DouYin extends ProviderInterface_1.default {
                 params: params,
                 responseType: 'json',
             });
-            this.withOpenId(response.data.openid);
+            if (!response.data || response.data.error_code != 0) {
+                throw new Error('Invalid token response: ' + JSON.stringify(response.data));
+            }
+            this.withOpenId(response.data.open_id);
             return this.normalizeAccessTokenResponse(response);
         });
     }
