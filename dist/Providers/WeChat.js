@@ -15,6 +15,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const ProviderInterface_1 = __importDefault(require("../Core/ProviderInterface"));
 const User_1 = __importDefault(require("../Core/User"));
 const Utils_1 = require("../Core/Utils");
+/**
+ * @see [公众号 - 网页授权](https://developers.weixin.qq.com/doc/offiaccount/OA_Web_Apps/Wechat_webpage_authorization.html)
+ * @see [开放平台 - 网站应用微信登录开发指南](https://open.weixin.qq.com/cgi-bin/showdocument?action=dir_list&t=resource/res_list&verify=1&id=open1419316505&token=&lang=zh_CN)
+ */
 class WeChat extends ProviderInterface_1.default {
     constructor(config) {
         super(config);

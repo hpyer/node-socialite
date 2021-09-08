@@ -14,6 +14,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const ProviderInterface_1 = __importDefault(require("../Core/ProviderInterface"));
 const User_1 = __importDefault(require("../Core/User"));
+/**
+ * @see [授权机制说明](https://open.weibo.com/wiki/%E6%8E%88%E6%9D%83%E6%9C%BA%E5%88%B6%E8%AF%B4%E6%98%8E)
+ */
 class Weibo extends ProviderInterface_1.default {
     constructor() {
         super(...arguments);

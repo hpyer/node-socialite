@@ -15,6 +15,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const ProviderInterface_1 = __importDefault(require("../Core/ProviderInterface"));
 const User_1 = __importDefault(require("../Core/User"));
 const Utils_1 = require("../Core/Utils");
+/**
+ * @see [OAuth2.0简介](https://wiki.connect.qq.com/oauth2-0%E7%AE%80%E4%BB%8B)
+ */
 class QQ extends ProviderInterface_1.default {
     constructor() {
         super(...arguments);

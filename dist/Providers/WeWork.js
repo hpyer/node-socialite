@@ -15,6 +15,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const ProviderInterface_1 = __importDefault(require("../Core/ProviderInterface"));
 const User_1 = __importDefault(require("../Core/User"));
 const Utils_1 = require("../Core/Utils");
+/**
+ * @see [网页授权登录](https://work.weixin.qq.com/api/doc/90000/90135/91020)
+ */
 class WeWork extends ProviderInterface_1.default {
     constructor() {
         super(...arguments);

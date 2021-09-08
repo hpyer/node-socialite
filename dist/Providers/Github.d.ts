@@ -1,5 +1,8 @@
 import ProviderInterface from "../Core/ProviderInterface";
 import User from "../Core/User";
+/**
+ * @see [授权 OAuth 应用程序](https://docs.github.com/cn/developers/apps/building-oauth-apps/authorizing-oauth-apps)
+ */
 export default class Github extends ProviderInterface {
     static NAME: string;
     protected _scopes: string[];

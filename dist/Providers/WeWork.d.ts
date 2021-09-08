@@ -1,5 +1,8 @@
 import ProviderInterface from "../Core/ProviderInterface";
 import User from "../Core/User";
+/**
+ * @see [网页授权登录](https://work.weixin.qq.com/api/doc/90000/90135/91020)
+ */
 export default class WeWork extends ProviderInterface {
     static NAME: string;
     protected _detailed: boolean;

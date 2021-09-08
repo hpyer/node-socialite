@@ -15,6 +15,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const ProviderInterface_1 = __importDefault(require("../Core/ProviderInterface"));
 const User_1 = __importDefault(require("../Core/User"));
 const Utils_1 = require("../Core/Utils");
+/**
+ * @see [WEB 授权说明](https://open.douyin.com/platform/doc/6852243568711583752)
+ */
 class DouYin extends ProviderInterface_1.default {
     constructor() {
         super(...arguments);
