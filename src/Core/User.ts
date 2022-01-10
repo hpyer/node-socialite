@@ -46,7 +46,7 @@ export default class User
    */
   expires_in: number = null;
 
-  constructor(data: object)
+  constructor(data: Partial<Record<keyof User, any>>)
   {
     this.merge(data);
   }
@@ -176,7 +176,7 @@ export default class User
     return this.provider;
   }
 
-  merge(attrs: object): this
+  merge(attrs: Partial<Record<keyof User, any>>): this
   {
     for (let k in attrs) {
       this[k] = attrs[k];

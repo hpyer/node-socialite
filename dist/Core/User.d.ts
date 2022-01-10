@@ -42,7 +42,7 @@ export default class User {
      * ExpiresIn
      */
     expires_in: number;
-    constructor(data: object);
+    constructor(data: Partial<Record<keyof User, any>>);
     /**
      * 获取 openid
      */
@@ -103,5 +103,5 @@ export default class User {
      * 获取Provider
      */
     getProvider(): string;
-    merge(attrs: object): this;
+    merge(attrs: Partial<Record<keyof User, any>>): this;
 }
