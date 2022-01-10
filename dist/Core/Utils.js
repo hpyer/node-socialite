@@ -6,24 +6,24 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.strCamel = exports.strStudly = exports.strLcwords = exports.strUcwords = exports.inArray = exports.isFunction = exports.isObject = exports.isNumber = exports.isArray = exports.isString = exports.parseQueryString = exports.buildQueryString = exports.merge = void 0;
 const qs_1 = __importDefault(require("qs"));
 const merge = (target, source) => {
-    if (exports.isObject(source)) {
+    if ((0, exports.isObject)(source)) {
         if (source.constructor !== Object) {
             target = source;
         }
         else {
-            if (!target || !exports.isObject(target)) {
+            if (!target || !(0, exports.isObject)(target)) {
                 target = {};
             }
             Object.keys(source).map((k) => {
                 if (!target[k]) {
                     target[k] = null;
                 }
-                target[k] = exports.merge(target[k], source[k]);
+                target[k] = (0, exports.merge)(target[k], source[k]);
             });
         }
     }
-    else if (exports.isArray(source)) {
-        if (!target || !exports.isArray(target)) {
+    else if ((0, exports.isArray)(source)) {
+        if (!target || !(0, exports.isArray)(target)) {
             target = [];
         }
         target = target.concat(target, source);
@@ -63,9 +63,9 @@ const isFunction = function (data) {
 };
 exports.isFunction = isFunction;
 const inArray = function (data, arr, strict = false) {
-    if (!exports.isArray(arr))
+    if (!(0, exports.isArray)(arr))
         return strict ? data === arr : data == arr;
-    if (exports.isFunction(arr.findIndex)) {
+    if ((0, exports.isFunction)(arr.findIndex)) {
         return arr.findIndex((o) => { return strict ? o === data : o == data; }) > -1;
     }
     else {
@@ -96,11 +96,11 @@ const strLcwords = function (str) {
 exports.strLcwords = strLcwords;
 // 驼峰（首字母大写），'hello word' => 'HelloWorld'
 const strStudly = function (value) {
-    return exports.strUcwords(value.replace(/[\-|\_]/gi, ' ')).replace(/\s/gi, '');
+    return (0, exports.strUcwords)(value.replace(/[\-|\_]/gi, ' ')).replace(/\s/gi, '');
 };
 exports.strStudly = strStudly;
 // 驼峰（首字母小写），'hello word' => 'helloWorld'
 const strCamel = function (value) {
-    return exports.strLcwords(exports.strStudly(value));
+    return (0, exports.strLcwords)((0, exports.strStudly)(value));
 };
 exports.strCamel = strCamel;

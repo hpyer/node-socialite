@@ -82,7 +82,7 @@ class QQ extends ProviderInterface_1.default {
                     oauth_consumer_key: this.getClientId(),
                 },
             });
-            return Utils_1.merge(response.data, {
+            return (0, Utils_1.merge)(response.data, {
                 openid,
                 unionid,
             });

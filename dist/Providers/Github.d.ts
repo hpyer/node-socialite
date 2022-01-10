@@ -1,3 +1,4 @@
+import { AxiosRequestHeaders } from "axios";
 import ProviderInterface from "../Core/ProviderInterface";
 import User from "../Core/User";
 /**
@@ -10,6 +11,6 @@ export default class Github extends ProviderInterface {
     protected getTokenUrl(): string;
     protected getUserByToken(token: string): Promise<object>;
     protected mapUserToObject(user: object): User;
-    protected createAuthorizationHeaders(token: string): object;
+    protected createAuthorizationHeaders(token: string): AxiosRequestHeaders;
     protected getEmailByToken(token: string): Promise<string>;
 }

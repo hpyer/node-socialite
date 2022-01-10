@@ -19,7 +19,7 @@ export default class WeChat extends ProviderInterface {
     withComponent(componentConfig: WechatComponentConfig): this;
     getComponent(): WechatComponent;
     tokenFromCode(code: string): Promise<object>;
-    protected getTokenFromCode(code: string): Promise<import("axios").AxiosResponse<any>>;
+    protected getTokenFromCode(code: string): Promise<import("axios").AxiosResponse<any, any>>;
     protected getTokenFields(code: string): object;
     protected getAuthUrl(): string;
     protected buildAuthUrlFromBase(url: string): string;

@@ -54,7 +54,7 @@ class OpenWeWork extends ProviderInterface_1.default {
             let token = yield this.getSuiteAccessToken();
             let user = yield this.getUser(token, code);
             if (this._detailed) {
-                user = Utils_1.merge(Utils_1.merge({}, user), yield this.getUserByTicket(user['user_ticket']));
+                user = (0, Utils_1.merge)((0, Utils_1.merge)({}, user), yield this.getUserByTicket(user['user_ticket']));
             }
             return this.mapUserToObject(user)
                 .setProvider(OpenWeWork.NAME)
@@ -140,7 +140,7 @@ class OpenWeWork extends ProviderInterface_1.default {
         if (this._state) {
             query['state'] = this._state;
         }
-        return 'https://open.weixin.qq.com/connect/oauth2/authorize?' + Utils_1.buildQueryString(query) + '#wechat_redirect';
+        return 'https://open.weixin.qq.com/connect/oauth2/authorize?' + (0, Utils_1.buildQueryString)(query) + '#wechat_redirect';
     }
     getTokenUrl() {
         return '';

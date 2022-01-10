@@ -12,7 +12,7 @@ class Config {
         }
     }
     get(key = null, defaultValue = null) {
-        let config = Utils_1.merge({}, this.config);
+        let config = (0, Utils_1.merge)({}, this.config);
         if (!key) {
             return config;
         }

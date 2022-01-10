@@ -108,22 +108,22 @@ class WeChat extends ProviderInterface_1.default {
     }
     getAuthUrl() {
         let path = 'oauth2/authorize';
-        if (Utils_1.inArray('snsapi_login', this._scopes)) {
+        if ((0, Utils_1.inArray)('snsapi_login', this._scopes)) {
             path = 'qrconnect';
         }
         return this.buildAuthUrlFromBase(`https://open.weixin.qq.com/connect/${path}`);
     }
     buildAuthUrlFromBase(url) {
         let query = this.getCodeFields();
-        return url + '?' + Utils_1.buildQueryString(query) + '#wechat_redirect';
+        return url + '?' + (0, Utils_1.buildQueryString)(query) + '#wechat_redirect';
     }
     getCodeFields() {
         if (this._component) {
-            this.with(Utils_1.merge(this._parameters, {
+            this.with((0, Utils_1.merge)(this._parameters, {
                 component_appid: this._component.id,
             }));
         }
-        let fields = Utils_1.merge({
+        let fields = (0, Utils_1.merge)({
             appid: this.getClientId(),
             redirect_uri: this._redirectUrl,
             scope: this.formatScopes(this._scopes, this._scopeSeparator),
@@ -143,7 +143,7 @@ class WeChat extends ProviderInterface_1.default {
     }
     userFromCode(code) {
         return __awaiter(this, void 0, void 0, function* () {
-            if (Utils_1.inArray('snsapi_base', this._scopes)) {
+            if ((0, Utils_1.inArray)('snsapi_base', this._scopes)) {
                 return this.mapUserToObject((yield this.getTokenFromCode(code)) || {});
             }
             let tokenResponse = yield this.tokenFromCode(code);

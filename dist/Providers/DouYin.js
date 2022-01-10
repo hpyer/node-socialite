@@ -33,7 +33,7 @@ class DouYin extends ProviderInterface_1.default {
         return this.buildAuthUrlFromBase(`${this._baseUrl}/platform/oauth/connect/`);
     }
     getCodeFields() {
-        let fields = Utils_1.merge({
+        let fields = (0, Utils_1.merge)({
             client_key: this.getClientId(),
             redirect_uri: this._redirectUrl,
             scope: this.formatScopes(this._scopes, this._scopeSeparator),

@@ -94,7 +94,7 @@ class ProviderInterface {
         return this._config.get('client_secret');
     }
     doRequest(options = {}) {
-        let opts = Utils_1.merge(Utils_1.merge({}, this._httpOptions), options);
+        let opts = (0, Utils_1.merge)((0, Utils_1.merge)({}, this._httpOptions), options);
         return axios_1.default.request(opts);
     }
     setHttpOptions(options) {
@@ -117,10 +117,10 @@ class ProviderInterface {
     }
     buildAuthUrlFromBase(url) {
         let query = this.getCodeFields();
-        return url + '?' + Utils_1.buildQueryString(query);
+        return url + '?' + (0, Utils_1.buildQueryString)(query);
     }
     getCodeFields() {
-        let fields = Utils_1.merge({
+        let fields = (0, Utils_1.merge)({
             client_id: this.getClientId(),
             redirect_uri: this._redirectUrl,
             scope: this.formatScopes(this._scopes, this._scopeSeparator),
@@ -208,7 +208,7 @@ class ProviderInterface {
         if (!data || !data[this._accessTokenKey]) {
             throw new Error('Authorize Failed: ' + JSON.stringify(data));
         }
-        return Utils_1.merge(data, {
+        return (0, Utils_1.merge)(data, {
             access_token: data[this._accessTokenKey],
             refresh_token: data[this._refreshTokenKey] || null,
             expires_in: parseInt(data[this._expiresInKey] || 0),

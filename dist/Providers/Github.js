@@ -37,7 +37,7 @@ class Github extends ProviderInterface_1.default {
                 headers: this.createAuthorizationHeaders(token),
             });
             let data = response.data;
-            if (Utils_1.inArray('user:email', this._scopes)) {
+            if ((0, Utils_1.inArray)('user:email', this._scopes)) {
                 data['email'] = yield this.getEmailByToken(token);
             }
             return data;

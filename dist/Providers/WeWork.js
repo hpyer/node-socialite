@@ -128,7 +128,7 @@ class WeWork extends ProviderInterface_1.default {
         if (this._state) {
             query['state'] = this._state;
         }
-        return 'https://open.weixin.qq.com/connect/oauth2/authorize?' + Utils_1.buildQueryString(query) + '#wechat_redirect';
+        return 'https://open.weixin.qq.com/connect/oauth2/authorize?' + (0, Utils_1.buildQueryString)(query) + '#wechat_redirect';
     }
     getTokenUrl() {
         return '';
