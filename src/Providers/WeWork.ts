@@ -3,9 +3,10 @@
 import ProviderInterface from "../Core/ProviderInterface";
 import User from "../Core/User";
 import { buildQueryString } from "../Core/Utils";
+import { ProviderConfig } from "../Types/global";
 
 /**
- * @see [网页授权登录](https://work.weixin.qq.com/api/doc/90000/90135/91020)
+ * @see [网页授权登录](https://developer.work.weixin.qq.com/document/path/91335)
  */
 export default class WeWork extends ProviderInterface
 {
@@ -13,6 +14,21 @@ export default class WeWork extends ProviderInterface
   protected _detailed: boolean = false;
   protected _agentId: number = null;
   protected _apiAccessToken: string = '';
+  protected _baseUrl: string = 'https://qyapi.weixin.qq.com';
+
+  constructor(config: ProviderConfig)
+  {
+    super(config);
+
+    if (!this._config.has('base_url')) {
+      this._baseUrl = this._config.get('base_url');
+    }
+  }
+
+  getBaseUrl()
+  {
+    return this._baseUrl;
+  }
 
   setAgentId(agentId: number): this
   {
@@ -35,7 +51,7 @@ export default class WeWork extends ProviderInterface
   async userFromCode(code: string): Promise<User>
   {
     let token = await this.getApiAccessToken();
-    let user = await this.getUserId(token, code);
+    let user = await this.getUser(token, code);
     if (this._detailed) {
       user = await this.getUserById(user['UserId']);
     }
@@ -55,7 +71,7 @@ export default class WeWork extends ProviderInterface
   protected async createApiAccessToken(): Promise<string>
   {
     let response = await this.doRequest({
-      url: 'https://qyapi.weixin.qq.com/cgi-bin/gettoken',
+      url: this._baseUrl + '/cgi-bin/gettoken',
       method: 'get',
       params: {
         corpid: this._config.get('corp_id') || this._config.get('corpid'),
@@ -69,10 +85,10 @@ export default class WeWork extends ProviderInterface
     return data['access_token'];
   }
 
-  protected async getUserId(token: string, code: string): Promise<object>
+  protected async getUser(token: string, code: string): Promise<object>
   {
     let response = await this.doRequest({
-      url: 'https://qyapi.weixin.qq.com/cgi-bin/user/getuserinfo',
+      url: this._baseUrl + '/cgi-bin/user/getuserinfo',
       method: 'get',
       params: {
         access_token: token,
@@ -92,7 +108,7 @@ export default class WeWork extends ProviderInterface
   protected async getUserById(userId: string): Promise<object>
   {
     let response = await this.doRequest({
-      url: 'https://qyapi.weixin.qq.com/cgi-bin/user/get',
+      url: this._baseUrl + '/cgi-bin/user/get',
       method: 'get',
       params: {
         access_token: this.getApiAccessToken(),
@@ -108,14 +124,6 @@ export default class WeWork extends ProviderInterface
 
   protected getAuthUrl(): string
   {
-    if (this._scopes && this._scopes.length > 0) {
-      return this.getOAuthUrl();
-    }
-    return this.getQrConnectUrl();
-  }
-
-  protected getOAuthUrl(): string
-  {
     let query = {
       appid: this.getClientId(),
       redirect_uri: this._redirectUrl,
@@ -126,23 +134,6 @@ export default class WeWork extends ProviderInterface
       query['state'] = this._state;
     }
     return 'https://open.weixin.qq.com/connect/oauth2/authorize?' + buildQueryString(query) + '#wechat_redirect';
-  }
-
-  protected getQrConnectUrl(): string
-  {
-    let query = {
-      appid: this.getClientId(),
-      agentid: this._agentId || this._config.get('agentid'),
-      redirect_uri: this._redirectUrl,
-      response_type: 'code',
-    };
-    if (this._state) {
-      query['state'] = this._state;
-    }
-    if (!query['agentid']) {
-      throw new Error('You must config the `agentid` in configuration or using `setAgentid(agentId)`.');
-    }
-    return 'https://open.work.weixin.qq.com/wwopen/sso/qrConnect?' + buildQueryString(query) + '#wechat_redirect';
   }
 
   protected getTokenUrl(): string

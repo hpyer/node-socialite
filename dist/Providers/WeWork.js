@@ -16,14 +16,21 @@ const ProviderInterface_1 = __importDefault(require("../Core/ProviderInterface")
 const User_1 = __importDefault(require("../Core/User"));
 const Utils_1 = require("../Core/Utils");
 /**
- * @see [网页授权登录](https://work.weixin.qq.com/api/doc/90000/90135/91020)
+ * @see [网页授权登录](https://developer.work.weixin.qq.com/document/path/91335)
  */
 class WeWork extends ProviderInterface_1.default {
-    constructor() {
-        super(...arguments);
+    constructor(config) {
+        super(config);
         this._detailed = false;
         this._agentId = null;
         this._apiAccessToken = '';
+        this._baseUrl = 'https://qyapi.weixin.qq.com';
+        if (!this._config.has('base_url')) {
+            this._baseUrl = this._config.get('base_url');
+        }
+    }
+    getBaseUrl() {
+        return this._baseUrl;
     }
     setAgentId(agentId) {
         this._agentId = agentId;
@@ -40,7 +47,7 @@ class WeWork extends ProviderInterface_1.default {
     userFromCode(code) {
         return __awaiter(this, void 0, void 0, function* () {
             let token = yield this.getApiAccessToken();
-            let user = yield this.getUserId(token, code);
+            let user = yield this.getUser(token, code);
             if (this._detailed) {
                 user = yield this.getUserById(user['UserId']);
             }
@@ -60,7 +67,7 @@ class WeWork extends ProviderInterface_1.default {
     createApiAccessToken() {
         return __awaiter(this, void 0, void 0, function* () {
             let response = yield this.doRequest({
-                url: 'https://qyapi.weixin.qq.com/cgi-bin/gettoken',
+                url: this._baseUrl + '/cgi-bin/gettoken',
                 method: 'get',
                 params: {
                     corpid: this._config.get('corp_id') || this._config.get('corpid'),
@@ -74,10 +81,10 @@ class WeWork extends ProviderInterface_1.default {
             return data['access_token'];
         });
     }
-    getUserId(token, code) {
+    getUser(token, code) {
         return __awaiter(this, void 0, void 0, function* () {
             let response = yield this.doRequest({
-                url: 'https://qyapi.weixin.qq.com/cgi-bin/user/getuserinfo',
+                url: this._baseUrl + '/cgi-bin/user/getuserinfo',
                 method: 'get',
                 params: {
                     access_token: token,
@@ -97,7 +104,7 @@ class WeWork extends ProviderInterface_1.default {
     getUserById(userId) {
         return __awaiter(this, void 0, void 0, function* () {
             let response = yield this.doRequest({
-                url: 'https://qyapi.weixin.qq.com/cgi-bin/user/get',
+                url: this._baseUrl + '/cgi-bin/user/get',
                 method: 'get',
                 params: {
                     access_token: this.getApiAccessToken(),
@@ -112,12 +119,6 @@ class WeWork extends ProviderInterface_1.default {
         });
     }
     getAuthUrl() {
-        if (this._scopes && this._scopes.length > 0) {
-            return this.getOAuthUrl();
-        }
-        return this.getQrConnectUrl();
-    }
-    getOAuthUrl() {
         let query = {
             appid: this.getClientId(),
             redirect_uri: this._redirectUrl,
@@ -128,21 +129,6 @@ class WeWork extends ProviderInterface_1.default {
             query['state'] = this._state;
         }
         return 'https://open.weixin.qq.com/connect/oauth2/authorize?' + Utils_1.buildQueryString(query) + '#wechat_redirect';
-    }
-    getQrConnectUrl() {
-        let query = {
-            appid: this.getClientId(),
-            agentid: this._agentId || this._config.get('agentid'),
-            redirect_uri: this._redirectUrl,
-            response_type: 'code',
-        };
-        if (this._state) {
-            query['state'] = this._state;
-        }
-        if (!query['agentid']) {
-            throw new Error('You must config the `agentid` in configuration or using `setAgentid(agentId)`.');
-        }
-        return 'https://open.work.weixin.qq.com/wwopen/sso/qrConnect?' + Utils_1.buildQueryString(query) + '#wechat_redirect';
     }
     getTokenUrl() {
         return '';

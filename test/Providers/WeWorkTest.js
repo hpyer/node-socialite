@@ -5,32 +5,6 @@ const { default: WeWork } = require('../../dist/Providers/WeWork');
 class TestUnit extends BaseProviderTest {
 
   test() {
-    it('Should the same qrConnect redirect url', () => {
-      let wework = new WeWork({
-        client_id: 'wework-corp-id',
-        client_secret: 'wework-corp-secret',
-        redirect: 'http://example.com/socialite/wework-callback',
-      });
-
-      let url = wework.setAgentId(10000).redirect();
-      this.assert.strictEqual(url, 'https://open.work.weixin.qq.com/wwopen/sso/qrConnect?appid=wework-corp-id&agentid=10000&redirect_uri=http%3A%2F%2Fexample.com%2Fsocialite%2Fwework-callback&response_type=code#wechat_redirect');
-    });
-
-    it('Should throw error while get qrConnect redirect url without agentId', () => {
-      let wework = new WeWork({
-        client_id: 'wework-corp-id',
-        client_secret: 'wework-corp-secret',
-        redirect: 'http://example.com/socialite/wework-callback',
-      });
-
-      try {
-        let url = wework.redirect();
-      }
-      catch (e) {
-        this.assert.strictEqual(e.message, 'You must config the `agentid` in configuration or using `setAgentid(agentId)`.');
-      }
-    });
-
     it('Should the same redirect url with custom data', () => {
       let wework = new WeWork({
         client_id: 'wework-corp-id',
