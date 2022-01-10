@@ -52,20 +52,23 @@ let manager = new SocialiteManager({
 // 如：ctx.request.query.code
 let code = 'xxxx';
 
-let user = manager.create('github').userFromCode(code);
+let user = await manager.create('github').userFromCode(code);
 
 user.id;        // 123456
 user.nickname;  // hpyer
 user.name;      // Hpyer
 user.email;     // test@exmaple.com
 user.avatar;    // https://exmpale.com/avatar.jpg
+
+// 也可以通过 .raw 获取接口返回的原始用户信息
+user.raw;
 ```
 
 ### 配置
 
 #### 支持的服务商
 
-`github`、`wechat`（微信）、`wework`（企业微信）、`weibo`（新浪微博）、`qq`（QQ）、`douyin`（抖音）
+`github`、`wechat`（微信）、`wework`（企业微信）、`weibo`（新浪微博）、`qq`（QQ）、`douyin`（抖音）、`open-wework`（企业微信开放平台）
 
 每个服务商只需配置 `client_id`, `client_secret`, `redirect` 三个通用参数即可使用（个别服务商需要额外的配置）。如：
 
