@@ -8,6 +8,7 @@ const ProviderInterface_1 = __importDefault(require("./ProviderInterface"));
 const Github_1 = __importDefault(require("../Providers/Github"));
 const WeChat_1 = __importDefault(require("../Providers/WeChat"));
 const WeWork_1 = __importDefault(require("../Providers/WeWork"));
+const OpenWeWork_1 = __importDefault(require("../Providers/OpenWeWork"));
 const Weibo_1 = __importDefault(require("../Providers/Weibo"));
 const QQ_1 = __importDefault(require("../Providers/QQ"));
 const DouYin_1 = __importDefault(require("../Providers/DouYin"));
@@ -20,6 +21,7 @@ class SocialiteManager {
             [Github_1.default.NAME]: Github_1.default,
             [WeChat_1.default.NAME]: WeChat_1.default,
             [WeWork_1.default.NAME]: WeWork_1.default,
+            [OpenWeWork_1.default.NAME]: OpenWeWork_1.default,
             [Weibo_1.default.NAME]: Weibo_1.default,
             [QQ_1.default.NAME]: QQ_1.default,
             [DouYin_1.default.NAME]: DouYin_1.default,
