@@ -6,6 +6,7 @@ import ProviderInterface from "./ProviderInterface";
 import Github from "../Providers/Github";
 import WeChat from "../Providers/WeChat";
 import WeWork from "../Providers/WeWork";
+import OpenWeWork from "../Providers/OpenWeWork";
 import Weibo from "../Providers/Weibo";
 import QQ from "../Providers/QQ";
 import DouYin from "../Providers/DouYin";
@@ -19,6 +20,7 @@ export default class SocialiteManager
     [Github.NAME]: Github,
     [WeChat.NAME]: WeChat,
     [WeWork.NAME]: WeWork,
+    [OpenWeWork.NAME]: OpenWeWork,
     [Weibo.NAME]: Weibo,
     [QQ.NAME]: QQ,
     [DouYin.NAME]: DouYin,
@@ -37,6 +39,7 @@ export default class SocialiteManager
   create(name: 'github'): Github;
   create(name: 'wechat'): WeChat;
   create(name: 'wework'): WeWork;
+  create(name: 'open-wework'): OpenWeWork;
   create(name: 'weibo'): Weibo;
   create(name: 'qq'): QQ;
   create(name: 'douyin'): DouYin;
