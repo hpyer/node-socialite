@@ -12,6 +12,7 @@ export default class WeWork extends ProviderInterface
 {
   public static NAME: string = 'wework';
   protected _detailed: boolean = false;
+  protected _asQrcode: boolean = false;
   protected _agentId: number = null;
   protected _apiAccessToken: string = '';
   protected _baseUrl: string = 'https://qyapi.weixin.qq.com';
@@ -22,6 +23,9 @@ export default class WeWork extends ProviderInterface
 
     if (!this._config.has('base_url')) {
       this._baseUrl = this._config.get('base_url');
+    }
+    if (!this._config.has('agent_id')) {
+      this._baseUrl = this._config.get('agent_id');
     }
   }
 
@@ -36,9 +40,20 @@ export default class WeWork extends ProviderInterface
     return this;
   }
 
+  withAgentId(agentId: number): this
+  {
+    return this.setAgentId(agentId);
+  }
+
   detailed(): this
   {
     this._detailed = true;
+    return this;
+  }
+
+  asQrcode(): this
+  {
+    this._asQrcode = true;
     return this;
   }
 
@@ -74,8 +89,8 @@ export default class WeWork extends ProviderInterface
       url: this._baseUrl + '/cgi-bin/gettoken',
       method: 'get',
       params: {
-        corpid: this._config.get('corp_id') || this._config.get('corpid'),
-        corpsecret: this._config.get('corp_secret') || this._config.get('corpsecret'),
+        corpid: this._config.get('corp_id') || this._config.get('corpid') || this.getClientId(),
+        corpsecret: this._config.get('corp_secret') || this._config.get('corpsecret') || this.getClientSecret(),
       }
     });
     let data = response.data;
@@ -130,8 +145,18 @@ export default class WeWork extends ProviderInterface
       response_type: 'code',
       scope: this.formatScopes(this._scopes, this._scopeSeparator),
     };
+    if (this._agentId) {
+      query['agentid'] = this._agentId;
+    }
     if (this._state) {
       query['state'] = this._state;
+    }
+    if (!this._agentId && (query.scope.indexOf('snsapi_privateinfo') > -1 || this._asQrcode)) {
+      throw new Error(`'agent_id' is require when qrcode mode or scopes is 'snsapi_privateinfo'`);
+    }
+    if (this._asQrcode) {
+      delete query.scope;
+      return `https://open.work.weixin.qq.com/wwopen/sso/qrConnect?` + buildQueryString(query);
     }
     return 'https://open.weixin.qq.com/connect/oauth2/authorize?' + buildQueryString(query) + '#wechat_redirect';
   }
