@@ -10,6 +10,7 @@ import OpenWeWork from "../Providers/OpenWeWork";
 import Weibo from "../Providers/Weibo";
 import QQ from "../Providers/QQ";
 import DouYin from "../Providers/DouYin";
+import Taobao from "../Providers/Taobao";
 
 export default class SocialiteManager
 {
@@ -24,6 +25,7 @@ export default class SocialiteManager
     [Weibo.NAME]: Weibo,
     [QQ.NAME]: QQ,
     [DouYin.NAME]: DouYin,
+    [Taobao.NAME]: Taobao,
   };
 
   constructor(config: SocialiteConfig)
