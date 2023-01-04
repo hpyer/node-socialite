@@ -1,11 +1,19 @@
 # CHANGELOG
 
 
+## v1.3.0 (2023-01-04)
+
+- Feat: 增加淘宝平台
+- Feat: 企业微信增加agentid字段，以及二维码模式授权
+
+- Fix: 取消用户信息字段限制
+- Fix: 优化企业微信开放平台的参数
+
 ## v1.2.6 (2022-04-22)
 
 - Refactor: 源码中移除dist目录
 
-## v1.2.5, origin/master, origin/HEAD (2022-01-12)
+## v1.2.5 (2022-01-12)
 
 - Feat: 新增企业微信开放平台(open-wework)
 - Feat: WeWork移除扫码授权登录模式，优化配置项
