@@ -68,7 +68,7 @@ user.raw;
 
 #### 支持的服务商
 
-`github`、`wechat`（微信）、`wework`（企业微信）、`weibo`（新浪微博）、`qq`（QQ）、`douyin`（抖音）、`open-wework`（企业微信开放平台）
+`github`、`wechat`（微信）、`wework`（企业微信）、`weibo`（新浪微博）、`qq`（QQ）、`douyin`（抖音）、`open-wework`（企业微信开放平台）、`taobao`（淘宝）
 
 每个服务商只需配置 `client_id`, `client_secret`, `redirect` 三个通用参数即可使用（个别服务商需要额外的配置）。如：
 
