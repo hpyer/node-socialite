@@ -12,6 +12,9 @@ export default class OpenWeWork extends ProviderInterface
 {
   public static NAME: string = 'open-wework';
   protected _detailed: boolean = false;
+  protected _asQrcode: boolean = false;
+  protected _userType: string = 'member';
+  protected _lang: string = 'zh';
   protected _suiteTicket: string = '';
   protected _agentId: number = null;
   protected _suiteAccessToken: string = '';
@@ -37,9 +40,32 @@ export default class OpenWeWork extends ProviderInterface
     return this;
   }
 
+  withAgentId(agentId: number): this
+  {
+    return this.setAgentId(agentId);
+  }
+
   detailed(): this
   {
     this._detailed = true;
+    return this;
+  }
+
+  asQrcode(): this
+  {
+    this._asQrcode = true;
+    return this;
+  }
+
+  withUserType(userType: string): this
+  {
+    this._userType = userType;
+    return this;
+  }
+
+  withLang(lang: string): this
+  {
+    this._lang = lang;
     return this;
   }
 
@@ -107,8 +133,11 @@ export default class OpenWeWork extends ProviderInterface
       }
     });
     let data = response.data;
-    if (!data || data['errcode'] || (!data['UserId'] && !data['OpenId'])) {
+    if (!data || data['errcode'] || (!data['UserId'] && !data['openid'])) {
       throw new Error(`Failed to get user openid: ${data['errmsg'] || 'Unknown'}`)
+    }
+    else if (!data['user_ticket']) {
+      this._detailed = false;
     }
     return data;
   }
@@ -119,7 +148,7 @@ export default class OpenWeWork extends ProviderInterface
       url: this._baseUrl + '/cgi-bin/service/getuserdetail3rd',
       method: 'post',
       params: {
-        suite_access_token: this.getSuiteAccessToken(),
+        suite_access_token: await this.getSuiteAccessToken(),
       },
       data: {
         user_ticket: userTicket,
@@ -134,19 +163,34 @@ export default class OpenWeWork extends ProviderInterface
 
   public getAuthUrl(): string
   {
+    if (this._asQrcode) {
+      let query = {
+        appid: this.getClientId(),
+        redirect_uri: this._redirectUrl,
+        usertype: this._userType,
+        lang: this._lang,
+      };
+      if (this._state) {
+        query['state'] = this._state;
+      }
+
+      return `https://open.work.weixin.qq.com/wwopen/sso/3rd_qrConnect?` + buildQueryString(query);
+    }
+
     let query = {
       appid: this.getClientId(),
       redirect_uri: this._redirectUrl,
       response_type: 'code',
       scope: this.formatScopes(this._scopes, this._scopeSeparator),
     };
+    if (this._state) {
+      query['state'] = this._state;
+    }
     let agentId = this._agentId || this._config.get('agentid');
     if (agentId) {
       query['agentid'] = agentId;
     }
-    if (this._state) {
-      query['state'] = this._state;
-    }
+
     return 'https://open.weixin.qq.com/connect/oauth2/authorize?' + buildQueryString(query) + '#wechat_redirect';
   }
 
@@ -157,22 +201,27 @@ export default class OpenWeWork extends ProviderInterface
 
   protected async getUserByToken(token: string): Promise<object>
   {
-    throw new Error(`WeWork doesn't support access_token mode.`);
+    throw new Error(`Open WeWork doesn't support access_token mode.`);
   }
 
   protected mapUserToObject(user: object): User
   {
     if (this._detailed) {
       return new User({
-        id: user['userid'] || null,
+        id: user['userid'] || user['UserId'] || null,
         name: user['name'] || null,
-        email: '',
         avatar: user['avatar'] || null,
+        gender: user['gender'] || null,
+        corpid: user['corpid'] || user['CorpId'] || null,
+        open_userid: user['open_userid'] || null,
+        qr_code: user['qr_code'] || null,
       });
     }
 
     return new User({
-      id: user['UserId'] || user['OpenId'] || null,
+      id: user['UserId'] || user['UserId'] || user['OpenId'] || user['openid'] || null,
+      corpid: user['corpid'] || user['CorpId'] || null,
+      open_userid: user['open_userid'] || null,
     });
   }
 

@@ -116,6 +116,18 @@ class TestUnit extends BaseProviderTest {
       this.assert.strictEqual(user.email, '');
       this.assert.strictEqual(user.avatar, 'fake2-avatar');
     });
+
+    it('Should the same redirect url as qrcode', () => {
+      let wework = new OpenWeWork({
+        client_id: 'openwework-corp-id',
+        client_secret: 'openwework-corp-secret',
+        redirect: 'http://example.com/socialite/openwework-callback',
+      });
+
+      let url = wework.scopes('snsapi_base').withAgentId('openwework-agent-id').asQrcode().redirect();
+      this.assert.strictEqual(url, 'https://open.work.weixin.qq.com/wwopen/sso/3rd_qrConnect?appid=openwework-corp-id&redirect_uri=http%3A%2F%2Fexample.com%2Fsocialite%2Fopenwework-callback&usertype=member&lang=zh');
+    });
+
   }
 
 }
