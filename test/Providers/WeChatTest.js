@@ -74,7 +74,7 @@ class TestUnit extends BaseProviderTest {
           headimgurl: 'fake-avatar',
         },
       ]);
-      let user = await wechat.userFromCode('123456');
+      let user = await wechat.scopes('snsapi_userinfo').userFromCode('123456');
 
       this.assert.strictEqual(user.id, 'fake-openid');
       this.assert.strictEqual(user.nickname, 'fake-nickname');
@@ -82,6 +82,30 @@ class TestUnit extends BaseProviderTest {
       this.assert.strictEqual(user.avatar, 'fake-avatar');
       this.assert.strictEqual(user.access_token, 'fake-access-token');
       this.assert.strictEqual(user.refresh_token, 'fake-refresh-token');
+    });
+
+    it(`Should fetch user from code (scope snsapi_base)`, async () => {
+      this.mockRest();
+
+      this.mockResponseMulti([
+        {
+          openid: 'fake-openid',
+          access_token: 'fake-access-token',
+          refresh_token: 'fake-refresh-token',
+          expires_in: 7200,
+        },
+        {
+          openid: 'fake-openid',
+        },
+      ]);
+      let user = await wechat.scopes('snsapi_base').userFromCode('123456');
+
+      this.assert.strictEqual(user.id, 'fake-openid');
+      this.assert.strictEqual(user.nickname, null);
+      this.assert.strictEqual(user.name, null);
+      this.assert.strictEqual(user.avatar, null);
+      this.assert.strictEqual(user.access_token, null);
+      this.assert.strictEqual(user.refresh_token, null);
     });
   }
 
@@ -108,6 +132,8 @@ class TestUnit extends BaseProviderTest {
     });
 
     it(`Should fetch token from code (with component)`, async () => {
+      this.mockRest();
+
       this.mockResponse({
         openid: 'fake-openid',
         access_token: 'fake-access-token',
@@ -123,6 +149,8 @@ class TestUnit extends BaseProviderTest {
     });
 
     it(`Should fetch user from token (with component)`, async () => {
+      this.mockRest();
+
       this.mockResponse({
         openid: 'fake-id',
         nickname: 'fake-nickname',

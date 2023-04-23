@@ -166,7 +166,7 @@ export default class WeChat extends ProviderInterface
   async userFromCode(code: string): Promise<User>
   {
     if (inArray('snsapi_base', this._scopes)) {
-      return this.mapUserToObject(await this.getTokenFromCode(code) || {});
+      return this.mapUserToObject((await this.tokenFromCode(code)));
     }
 
     let tokenResponse = await this.tokenFromCode(code);
