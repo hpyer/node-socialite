@@ -68,7 +68,7 @@ user.raw;
 
 #### 支持的服务商
 
-`github`、`wechat`（微信）、`wework`（企业微信）、`weibo`（新浪微博）、`qq`（QQ）、`douyin`（抖音）、`open-wework`（企业微信开放平台）、`taobao`（淘宝）、`gitee`
+`github`、`wechat`（微信）、`wework`（企业微信）、`weibo`（新浪微博）、`qq`（QQ）、`douyin`（抖音）、`open-wework`（企业微信开放平台）、`taobao`（淘宝）、`gitee`、`coding`
 
 每个服务商只需配置 `client_id`, `client_secret`, `redirect` 三个通用参数即可使用（个别服务商需要额外的配置）。如：
 
@@ -84,6 +84,20 @@ let config = {
     client_secret: 'your-app-secret',
     redirect: 'http://example.com/socialite/callback',
   },
+}
+```
+
+#### 有特殊配置项的服务商
+
+`coding` [官方文档](https://coding.net/help/openapi)
+
+```js
+{
+  client_id: 'your-app-id',
+  client_secret: 'your-app-secret',
+  redirect: 'http://example.com/socialite/callback',
+  // 团队地址，末尾不要加“/”
+  team_url: 'https://example.coding.net',
 }
 ```
 

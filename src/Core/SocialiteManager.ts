@@ -12,6 +12,7 @@ import QQ from "../Providers/QQ";
 import DouYin from "../Providers/DouYin";
 import Taobao from "../Providers/Taobao";
 import Gitee from "../Providers/Gitee";
+import Coding from "../Providers/Coding";
 
 export default class SocialiteManager
 {
@@ -28,6 +29,7 @@ export default class SocialiteManager
     [DouYin.NAME]: DouYin,
     [Taobao.NAME]: Taobao,
     [Gitee.NAME]: Gitee,
+    [Coding.NAME]: Coding,
   };
 
   constructor(config: SocialiteConfig)
