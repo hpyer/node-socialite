@@ -142,7 +142,9 @@ export default abstract class ProviderInterface
   doRequest(options: AxiosRequestConfig = {}): Promise<AxiosResponse<any>>
   {
     let opts = merge(merge({}, this._httpOptions), options) as AxiosRequestConfig;
-    return Axios.request(opts);
+    return Axios.request(opts).then().catch(e => {
+      return e.response;
+    });
   }
 
   setHttpOptions(options: AxiosRequestConfig): this
