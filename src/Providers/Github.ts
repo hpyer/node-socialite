@@ -1,6 +1,5 @@
 'use strict';
 
-import { AxiosRequestHeaders } from "axios";
 import ProviderInterface from "../Core/ProviderInterface";
 import User from "../Core/User";
 import { inArray } from "../Core/Utils";
@@ -50,7 +49,7 @@ export default class Github extends ProviderInterface
     });
   }
 
-  protected createAuthorizationHeaders(token: string): AxiosRequestHeaders
+  protected createAuthorizationHeaders(token: string)
   {
     return {
       'Accept': 'application/vnd.github.v3+json',
