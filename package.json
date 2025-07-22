@@ -1,6 +1,6 @@
 {
   "name": "node-socialite",
-  "version": "1.4.1",
+  "version": "1.4.2",
   "description": "Socialite is an OAuth2 authentication tool for Node.js",
   "main": "dist/index.js",
   "scripts": {
