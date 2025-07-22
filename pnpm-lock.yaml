@@ -16,14 +16,14 @@ importers:
         version: 6.14.0
     devDependencies:
       '@types/node':
-        specifier: ^17.0.45
-        version: 17.0.45
+        specifier: ^20.19.9
+        version: 20.19.9
       mocha:
         specifier: ^11.7.1
         version: 11.7.1
       package-release:
-        specifier: ^1.0.3
-        version: 1.0.3
+        specifier: ^1.0.4
+        version: 1.0.4
       sinon:
         specifier: ^12.0.1
         version: 12.0.1
@@ -59,8 +59,8 @@ packages:
   '@sinonjs/text-encoding@0.7.3':
     resolution: {integrity: sha512-DE427ROAphMQzU4ENbliGYrBSYPXF+TtLg9S8vzeA+OF4ZKzoDdzfL8sxuMUGS/lgRhM6j1URSk9ghf7Xo1tyA==}
 
-  '@types/node@17.0.45':
-    resolution: {integrity: sha512-w+tIMs3rq2afQdsPJlODhoUEKzFP1ayaoyl1CcnwtIlsVe7K7bA1NGm4s3PraqTLlXnbIN84zuBlxBWo1u9BLw==}
+  '@types/node@20.19.9':
+    resolution: {integrity: sha512-cuVNgarYWZqxRJDQHEB58GEONhOK79QVR/qYx4S7kcUObQvUwvFnYxJuuHUKm2aieN9X3yZB4LZsuYNU1Qphsw==}
 
   ansi-regex@5.0.1:
     resolution: {integrity: sha512-quJQXlTSUGL2LH9SUXo8VwsY4soanhgo6LNSm84E1LBcE8s3O0wpdiRzyR9z/ZZJMlMWv37qOOb9pdJlMUEKFQ==}
@@ -354,8 +354,8 @@ packages:
   package-json-from-dist@1.0.1:
     resolution: {integrity: sha512-UEZIS3/by4OC8vL3P2dTXRETpebLI2NiI5vIrjaD/5UtrkFX/tNbwjTSRAGC/+7CAo2pIcBaRgWmcBBHcsaCIw==}
 
-  package-release@1.0.3:
-    resolution: {integrity: sha512-EtcJhbuqoqbj1Vt9z5U2bHX4cqDXj0zgdoDRiL44rxUujMbCa2p0Om+xKgQMhGVsPwB8nM1J7yXVU+LHXuHLXA==}
+  package-release@1.0.4:
+    resolution: {integrity: sha512-bSbfgiZpKL4BHVwbDxbBZ1aF5SLTMMgjkItTQ4PvJ0MZJJtdkFleRtTktWTqSa9xExnl2tv7dDfcyRGlk0Yq+g==}
     hasBin: true
 
   path-exists@4.0.0:
@@ -473,6 +473,9 @@ packages:
     engines: {node: '>=14.17'}
     hasBin: true
 
+  undici-types@6.21.0:
+    resolution: {integrity: sha512-iwDZqg0QAGrg9Rav5H4n0M64c3mkR59cJ6wQp+7C4nI0gsmExaedaYLNO44eT4AtBBwjbTiGPMlt2Md0T9H9JQ==}
+
   which@2.0.2:
     resolution: {integrity: sha512-BLI3Tl1TW3Pvl70l3yq3Y64i+awpwXqsGBYWkkqMtnbXgrMD+yj7rhW0kuEDxzJaYXGjEW5ogapKNMEKNMjibA==}
     engines: {node: '>= 8'}
@@ -547,7 +550,9 @@ snapshots:
 
   '@sinonjs/text-encoding@0.7.3': {}
 
-  '@types/node@17.0.45': {}
+  '@types/node@20.19.9':
+    dependencies:
+      undici-types: 6.21.0
 
   ansi-regex@5.0.1: {}
 
@@ -830,7 +835,7 @@ snapshots:
 
   package-json-from-dist@1.0.1: {}
 
-  package-release@1.0.3:
+  package-release@1.0.4:
     dependencies:
       minimist: 1.2.8
 
@@ -947,6 +952,8 @@ snapshots:
   type-detect@4.1.0: {}
 
   typescript@5.8.3: {}
+
+  undici-types@6.21.0: {}
 
   which@2.0.2:
     dependencies:
