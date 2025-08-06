@@ -2,7 +2,7 @@
 /**
  * 授权后用户信息接口
  */
-declare interface UserInterface {
+export declare interface UserInterface {
 
   /**
    * 服务商标识
@@ -50,7 +50,7 @@ declare interface UserInterface {
 /**
  * 服务商接口
  */
-declare interface ProviderInterface {
+export declare interface ProviderInterface {
   /**
    * 返回生成的授权地址
    */
@@ -77,28 +77,28 @@ declare interface ProviderInterface {
 /**
  * 服务商类（可new的构造函数）
  */
-declare interface ProviderConstructable {
+export declare interface ProviderConstructable {
   new(config: ProviderConfig): ProviderInterface;
 }
 
 /**
  * 本工具支持的服务商映射表，键名为服务商标识，键值为服务商类
  */
-declare interface SupportProviders {
+export declare interface SupportProviders {
   [key: string]: ProviderConstructable;
 }
 
 /**
  * 已解析的服务商映射表，键名为服务商标识，键值为服务商实例
  */
-declare interface ResolvedProviders {
+export declare interface ResolvedProviders {
   [key: string]: ProviderInterface;
 }
 
 /**
  * 服务商配置项
  */
-declare interface ProviderConfig {
+export declare interface ProviderConfig {
   /**
    * 服务商，支持3种方法
    *
@@ -144,26 +144,26 @@ declare interface ProviderConfig {
  * 键名为服务商的标识，如果需要管理同一个服务商的不同应用，
  * 则键名可以用作别名，但同时配置中的 provider 属性必填
  */
-declare interface SocialiteConfig {
+export declare interface SocialiteConfig {
   [key: string]: ProviderConfig;
 }
 
 /**
  * 自定义服务商创建方法映射表，键名为服务商标识，键值为对应的创建方法
  */
-declare interface CustomProviderCreators {
+export declare interface CustomProviderCreators {
   [key: string]: ProviderCreator;
 }
 
 /**
  * 服务商创建方法
  */
-declare type ProviderCreator = (config: ProviderConfig) => ProviderInterface;
+export declare type ProviderCreator = (config: ProviderConfig) => ProviderInterface;
 
 /**
  * 微信组件配置
  */
-declare interface WechatComponent {
+export declare interface WechatComponent {
   id: string;
   token: string;
 }
@@ -171,7 +171,7 @@ declare interface WechatComponent {
 /**
  * 微信组件配置选项
  */
-declare interface WechatComponentConfig {
+export declare interface WechatComponentConfig {
   id?: string;
   app_id?: string;
   component_app_id?: string;

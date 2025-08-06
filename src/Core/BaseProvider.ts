@@ -1,11 +1,14 @@
 'use strict';
 
-import '../../types/global.d.ts';
+import { ProviderConfig, ProviderInterface } from "../../types/global";
 import Axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 import { Config } from "./Config";
 import { User } from "./User";
 import { buildQueryString, merge } from "./Utils";
 
+/**
+ * 服务商抽象类
+ */
 export abstract class BaseProvider implements ProviderInterface
 {
   /**

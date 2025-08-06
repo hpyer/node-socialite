@@ -1,5 +1,6 @@
 'use strict';
 
+import { ProviderConfig } from "../../types/global";
 import { BaseProvider } from "../Core/BaseProvider";
 import { User } from "../Core/User";
 import { buildQueryString, merge } from "../Core/Utils";

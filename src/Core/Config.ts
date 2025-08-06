@@ -1,6 +1,6 @@
 'use strict';
 
-import '../../types/global.d.ts';
+import { SocialiteConfig } from "../../types/global";
 import { merge } from "./Utils";
 
 /**

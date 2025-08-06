@@ -1,6 +1,6 @@
 'use strict';
 
-import '../../types/global.d.ts';
+import { UserInterface } from "../../types/global";
 
 /**
  * OAuth授权后的用户对象

@@ -1,6 +1,6 @@
 'use strict';
 
-import '../../types/global.d.ts';
+import { CustomProviderCreators, ProviderConfig, ProviderConstructable, ProviderCreator, ProviderInterface, ResolvedProviders, SocialiteConfig, SupportProviders } from "../../types/global";
 import { Config } from "./Config";
 import { BaseProvider } from "./BaseProvider";
 import Github from "../Providers/Github";
@@ -14,6 +14,9 @@ import Taobao from "../Providers/Taobao";
 import Gitee from "../Providers/Gitee";
 import Coding from "../Providers/Coding";
 
+/**
+ * 社交服务管理器
+ */
 export class SocialiteManager
 {
   protected config: Config = null;

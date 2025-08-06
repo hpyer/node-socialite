@@ -1,5 +1,6 @@
 'use strict';
 
+import { WechatComponent, WechatComponentConfig } from "../../types/global";
 import { BaseProvider } from "../Core/BaseProvider";
 import { User } from "../Core/User";
 import { inArray, buildQueryString, merge } from "../Core/Utils";
