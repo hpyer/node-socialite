@@ -6,7 +6,7 @@ import { User } from "../Core/User";
 /**
  * @see [授权机制说明](https://open.weibo.com/wiki/%E6%8E%88%E6%9D%83%E6%9C%BA%E5%88%B6%E8%AF%B4%E6%98%8E)
  */
-export default class Weibo extends BaseProvider
+export class Weibo extends BaseProvider
 {
   public static NAME: string = 'weibo';
   protected _baseUrl: string = 'https://api.weibo.com';

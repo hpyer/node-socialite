@@ -1,6 +1,6 @@
 
 const BaseProviderTest = require('../BaseProviderTest');
-const { default: Gitee } = require('../../dist/Providers/Gitee');
+const { Gitee } = require('../../dist/Providers/Gitee');
 
 class TestUnit extends BaseProviderTest {
 

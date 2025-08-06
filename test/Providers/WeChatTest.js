@@ -1,6 +1,6 @@
 
 const BaseProviderTest = require('../BaseProviderTest');
-const { default: WeChat } = require('../../dist/Providers/WeChat');
+const { WeChat } = require('../../dist/Providers/WeChat');
 
 class TestUnit extends BaseProviderTest {
 

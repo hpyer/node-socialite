@@ -1,6 +1,6 @@
 
 const BaseProviderTest = require('../BaseProviderTest');
-const { default: OpenWeWork } = require('../../dist/Providers/OpenWeWork');
+const { OpenWeWork } = require('../../dist/Providers/OpenWeWork');
 
 class TestUnit extends BaseProviderTest {
 

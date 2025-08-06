@@ -1,6 +1,6 @@
 
 const BaseProviderTest = require('../BaseProviderTest');
-const { default: QQ } = require('../../dist/Providers/QQ');
+const { QQ } = require('../../dist/Providers/QQ');
 
 class TestUnit extends BaseProviderTest {
 

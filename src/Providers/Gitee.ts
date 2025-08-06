@@ -6,7 +6,7 @@ import { User } from "../Core/User";
 /**
  * @see [OAuth文档](https://gitee.com/api/v5/oauth_doc)
  */
-export default class Gitee extends BaseProvider
+export class Gitee extends BaseProvider
 {
   public static NAME: string = 'gitee';
   protected _scopes: string[] = ['user_info'];

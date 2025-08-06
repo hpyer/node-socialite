@@ -1,6 +1,6 @@
 
 const BaseProviderTest = require('../BaseProviderTest');
-const { default: WeWork } = require('../../dist/Providers/WeWork');
+const { WeWork } = require('../../dist/Providers/WeWork');
 
 class TestUnit extends BaseProviderTest {
 

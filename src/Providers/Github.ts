@@ -7,7 +7,7 @@ import { inArray } from "../Core/Utils";
 /**
  * @see [授权 OAuth 应用程序](https://docs.github.com/cn/developers/apps/building-oauth-apps/authorizing-oauth-apps)
  */
-export default class Github extends BaseProvider
+export class Github extends BaseProvider
 {
   public static NAME: string = 'github';
   protected _scopes: string[] = ['read:user'];

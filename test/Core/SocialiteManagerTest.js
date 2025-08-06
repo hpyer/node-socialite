@@ -2,7 +2,7 @@
 const assert = require('assert');
 
 const { SocialiteManager, BaseProvider, User } = require('../../dist');
-const { default: Github } = require('../../dist/Providers/Github');
+const { Github } = require('../../dist/Providers/Github');
 
 class TestCustomProvider extends BaseProvider {
   getAuthUrl() {

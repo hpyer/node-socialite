@@ -1,6 +1,6 @@
 
 const BaseProviderTest = require('../BaseProviderTest');
-const { default: Taobao } = require('../../dist/Providers/Taobao');
+const { Taobao } = require('../../dist/Providers/Taobao');
 
 class TestUnit extends BaseProviderTest {
 

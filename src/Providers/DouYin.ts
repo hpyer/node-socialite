@@ -7,7 +7,7 @@ import { merge } from "../Core/Utils";
 /**
  * @see [WEB 授权说明](https://open.douyin.com/platform/doc/6852243568711583752)
  */
-export default class DouYin extends BaseProvider
+export class DouYin extends BaseProvider
 {
   public static NAME: string = 'douyin';
   protected _baseUrl: string = 'https://open.douyin.com';

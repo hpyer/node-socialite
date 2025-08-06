@@ -1,6 +1,6 @@
 
 const BaseProviderTest = require('../BaseProviderTest');
-const { default: Github } = require('../../dist/Providers/Github');
+const { Github } = require('../../dist/Providers/Github');
 
 class TestUnit extends BaseProviderTest {
 

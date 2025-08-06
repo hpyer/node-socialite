@@ -7,7 +7,7 @@ import { buildQueryString, formatTime, generateHash, merge } from "../Core/Utils
 /**
  * @see [Taobao - 用户授权介绍](https://open.taobao.com/doc.htm?docId=102635&docType=1&source=search)
  */
-export default class Taobao extends BaseProvider
+export class Taobao extends BaseProvider
 {
   public static NAME: string = 'taobao';
   protected _baseUrl: string = 'https://oauth.taobao.com';

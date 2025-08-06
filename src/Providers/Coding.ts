@@ -7,7 +7,7 @@ import { User } from "../Core/User";
 /**
  * @see [OAuth认证](https://coding.net/help/openapi)
  */
-export default class Coding extends BaseProvider
+export class Coding extends BaseProvider
 {
   public static NAME: string = 'coding';
   protected _scopes: string[] = ['user', 'user:email'];

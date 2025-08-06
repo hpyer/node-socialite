@@ -1,6 +1,6 @@
 
 const BaseProviderTest = require('../BaseProviderTest');
-const { default: DouYin } = require('../../dist/Providers/DouYin');
+const { DouYin } = require('../../dist/Providers/DouYin');
 
 class TestUnit extends BaseProviderTest {
 

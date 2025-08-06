@@ -9,7 +9,7 @@ import { inArray, buildQueryString, merge } from "../Core/Utils";
  * @see [公众号 - 网页授权](https://developers.weixin.qq.com/doc/offiaccount/OA_Web_Apps/Wechat_webpage_authorization.html)
  * @see [开放平台 - 网站应用微信登录开发指南](https://open.weixin.qq.com/cgi-bin/showdocument?action=dir_list&t=resource/res_list&verify=1&id=open1419316505&token=&lang=zh_CN)
  */
-export default class WeChat extends BaseProvider
+export class WeChat extends BaseProvider
 {
   public static NAME: string = 'wechat';
   protected _scopes: string[] = ['snsapi_login'];

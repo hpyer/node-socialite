@@ -8,7 +8,7 @@ import { buildQueryString, merge } from "../Core/Utils";
 /**
  * @see [网页授权登录](https://developer.work.weixin.qq.com/document/path/91119)
  */
-export default class OpenWeWork extends BaseProvider
+export class OpenWeWork extends BaseProvider
 {
   public static NAME: string = 'open-wework';
   protected _detailed: boolean = false;

@@ -8,7 +8,7 @@ import { buildQueryString } from "../Core/Utils";
 /**
  * @see [网页授权登录](https://developer.work.weixin.qq.com/document/path/91335)
  */
-export default class WeWork extends BaseProvider
+export class WeWork extends BaseProvider
 {
   public static NAME: string = 'wework';
   protected _detailed: boolean = false;

@@ -3,16 +3,16 @@
 import { CustomProviderCreators, ProviderConfig, ProviderConstructable, ProviderCreator, ProviderInterface, ResolvedProviders, SocialiteConfig, SupportProviders } from "../../types/global";
 import { Config } from "./Config";
 import { BaseProvider } from "./BaseProvider";
-import Github from "../Providers/Github";
-import WeChat from "../Providers/WeChat";
-import WeWork from "../Providers/WeWork";
-import OpenWeWork from "../Providers/OpenWeWork";
-import Weibo from "../Providers/Weibo";
-import QQ from "../Providers/QQ";
-import DouYin from "../Providers/DouYin";
-import Taobao from "../Providers/Taobao";
-import Gitee from "../Providers/Gitee";
-import Coding from "../Providers/Coding";
+import { Github } from "../Providers/Github";
+import { WeChat } from "../Providers/WeChat";
+import { WeWork } from "../Providers/WeWork";
+import { OpenWeWork } from "../Providers/OpenWeWork";
+import { Weibo } from "../Providers/Weibo";
+import { QQ } from "../Providers/QQ";
+import { DouYin } from "../Providers/DouYin";
+import { Taobao } from "../Providers/Taobao";
+import { Gitee } from "../Providers/Gitee";
+import { Coding } from "../Providers/Coding";
 
 /**
  * 社交服务管理器
