@@ -1,12 +1,11 @@
 'use strict';
 
 import Axios, { AxiosRequestConfig, AxiosResponse } from "axios";
-import Config from "../Core/Config";
-import User from "../Core/User";
-import { buildQueryString, merge } from "../Core/Utils";
-import { ProviderConfig } from "../Types/global";
+import { Config } from "./Config";
+import { User } from "./User";
+import { buildQueryString, merge } from "./Utils";
 
-export default abstract class ProviderInterface
+export abstract class BaseProvider implements ProviderInterface
 {
   /**
    * 供应商标识
@@ -16,7 +15,7 @@ export default abstract class ProviderInterface
   protected _config: Config = null;
   protected _state: string = '';
   protected _redirectUrl: string = '';
-  protected _parameters: object = {};
+  protected _parameters: Record<string, any> = {};
   protected _scopes: string[] = [];
   protected _scopeSeparator: string = ',';
   protected _httpOptions: AxiosRequestConfig = {};
@@ -52,24 +51,24 @@ export default abstract class ProviderInterface
   /**
    * 返回生成的授权地址
    */
-  protected abstract getAuthUrl(): string;
+  abstract getAuthUrl(): string;
 
   /**
    * 返回获取token的接口地址
    */
-  protected abstract getTokenUrl(): string;
+  abstract getTokenUrl(): string;
 
   /**
    * 根据token获取用户信息
    * @param token tokenFromCode() 方法获取到的 token
    */
-  protected abstract getUserByToken(token: string): Promise<object>;
+  abstract getUserByToken(token: string): Promise<Record<string, any>>;
 
   /**
    * 将用户信息映射为用户对象
    * @param data getUserByToken() 方法获取到的用户信息
    */
-  protected abstract mapUserToObject(data: object): User;
+  abstract mapUserToObject(data: Record<string, any>): User;
 
   /**
    * 获取授权URL
@@ -118,7 +117,7 @@ export default abstract class ProviderInterface
     return this;
   }
 
-  with(parameters: object): this
+  with(parameters: Record<string, any>): this
   {
     this._parameters = parameters;
     return this;
@@ -163,7 +162,7 @@ export default abstract class ProviderInterface
     return scopes.join(scopeSeparator);
   }
 
-  protected getTokenFields(code: string): object
+  protected getTokenFields(code: string): Record<string, any>
   {
     return {
       client_id: this.getClientId(),
@@ -179,7 +178,7 @@ export default abstract class ProviderInterface
     return url + '?' + buildQueryString(query);
   }
 
-  protected getCodeFields(): object
+  protected getCodeFields(): Record<string, any>
   {
     let fields = merge({
       client_id: this.getClientId(),
@@ -210,7 +209,7 @@ export default abstract class ProviderInterface
    * 根据授权后的code获取token
    * @param code 授权后的code
    */
-  async tokenFromCode(code: string): Promise<object>
+  async tokenFromCode(code: string): Promise<Record<string, any>>
   {
     let response = await this.doRequest({
       url: this.getTokenUrl(),
@@ -234,7 +233,7 @@ export default abstract class ProviderInterface
     let user = await this.getUserByToken(token);
 
     return this.mapUserToObject(user)
-      .setProvider((this.constructor as typeof ProviderInterface).NAME)
+      .setProvider((this.constructor as typeof BaseProvider).NAME)
       .setRaw(user)
       .setAccessToken(token);
   }
@@ -253,9 +252,9 @@ export default abstract class ProviderInterface
    * 格式化 AccessToken 对象，确保可以通过 access_token, refresh_token, expires_in 三个属性访问
    * @param response
    */
-  protected normalizeAccessTokenResponse(response: AxiosResponse | object | string): object
+  protected normalizeAccessTokenResponse(response: AxiosResponse | Record<string, any> | string): Record<string, any>
   {
-    let data: object = null;
+    let data: Record<string, any> = null;
 
     if (this.isAxiosResponse(response)) {
       if (response.status != 200) {

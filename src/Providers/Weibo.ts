@@ -1,35 +1,35 @@
 'use strict';
 
-import ProviderInterface from "../Core/ProviderInterface";
-import User from "../Core/User";
+import { BaseProvider } from "../Core/BaseProvider";
+import { User } from "../Core/User";
 
 /**
  * @see [授权机制说明](https://open.weibo.com/wiki/%E6%8E%88%E6%9D%83%E6%9C%BA%E5%88%B6%E8%AF%B4%E6%98%8E)
  */
-export default class Weibo extends ProviderInterface
+export default class Weibo extends BaseProvider
 {
   public static NAME: string = 'weibo';
   protected _baseUrl: string = 'https://api.weibo.com';
   protected _scopes: string[] = ['email'];
 
-  protected getAuthUrl(): string
+  getAuthUrl(): string
   {
     return this.buildAuthUrlFromBase(`${this._baseUrl}/oauth2/authorize`);
   }
 
-  protected getTokenUrl(): string
+  getTokenUrl(): string
   {
     return `${this._baseUrl}/2/oauth2/access_token`;
   }
 
-  protected getTokenFields(code: string): object
+  protected getTokenFields(code: string): Record<string, any>
   {
     let fields = super.getTokenFields(code);
     fields['grant_type'] = 'authorization_code';
     return fields;
   }
 
-  protected async getUserByToken(token: string): Promise<object>
+  async getUserByToken(token: string): Promise<Record<string, any>>
   {
     let uid = await this.getTokenPayload(token);
     if (!uid) {
@@ -74,7 +74,7 @@ export default class Weibo extends ProviderInterface
     }
   }
 
-  protected mapUserToObject(user: object): User
+  mapUserToObject(user: Record<string, any>): User
   {
     return new User({
       id: user['id'] || null,

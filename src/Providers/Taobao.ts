@@ -1,13 +1,13 @@
 'use strict';
 
-import ProviderInterface from "../Core/ProviderInterface";
-import User from "../Core/User";
+import { BaseProvider } from "../Core/BaseProvider";
+import { User } from "../Core/User";
 import { buildQueryString, formatTime, generateHash, merge } from "../Core/Utils";
 
 /**
  * @see [Taobao - 用户授权介绍](https://open.taobao.com/doc.htm?docId=102635&docType=1&source=search)
  */
-export default class Taobao extends ProviderInterface
+export default class Taobao extends BaseProvider
 {
   public static NAME: string = 'taobao';
   protected _baseUrl: string = 'https://oauth.taobao.com';
@@ -21,12 +21,12 @@ export default class Taobao extends ProviderInterface
     return this;
   }
 
-  protected getAuthUrl(): string
+  getAuthUrl(): string
   {
     return this.buildAuthUrlFromBase(`${this._baseUrl}/authorize`);
   }
 
-  protected getCodeFields(): object
+  protected getCodeFields(): Record<string, any>
   {
     return {
       client_id: this.getClientId(),
@@ -36,12 +36,12 @@ export default class Taobao extends ProviderInterface
     };
   }
 
-  protected getTokenUrl(): string
+  getTokenUrl(): string
   {
     return `${this._baseUrl}/token`;
   }
 
-  protected getTokenFields(code: string): object
+  protected getTokenFields(code: string): Record<string, any>
   {
     let fields = super.getTokenFields(code);
     fields['grant_type'] = 'authorization_code';
@@ -49,7 +49,7 @@ export default class Taobao extends ProviderInterface
     return fields;
   }
 
-  async tokenFromCode(code: string): Promise<object>
+  async tokenFromCode(code: string): Promise<Record<string, any>>
   {
     let params = this.getTokenFields(code);
     let response = await this.doRequest({
@@ -62,7 +62,7 @@ export default class Taobao extends ProviderInterface
     return this.normalizeAccessTokenResponse(response);
   }
 
-  protected generateSign(params: object) {
+  protected generateSign(params: Record<string, any>) {
     let keys = Object.keys(params);
     keys.sort();
 
@@ -76,7 +76,7 @@ export default class Taobao extends ProviderInterface
     return generateHash(str, 'md5').toUpperCase();
   }
 
-  protected getPublicFields(token: string, apiFields: object = {}) {
+  protected getPublicFields(token: string, apiFields: Record<string, any> = {}) {
     let fields = {
       app_key: this.getClientId(),
       sign_method: 'md5',
@@ -99,7 +99,7 @@ export default class Taobao extends ProviderInterface
     return `${url}?${query}`
   }
 
-  protected async getUserByToken(token: string): Promise<object>
+  async getUserByToken(token: string): Promise<Record<string, any>>
   {
     let resp = await this.doRequest({
       url: this.getUserInfoUrl(this._gatewayUrl, token),
@@ -111,7 +111,7 @@ export default class Taobao extends ProviderInterface
     return resp.data['miniapp_userInfo_get_response']['result']['model'];
   }
 
-  protected mapUserToObject(user: object): User
+  mapUserToObject(user: Record<string, any>): User
   {
     return new User({
       id: user['open_id'] || null,

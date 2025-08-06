@@ -1,28 +1,28 @@
 'use strict';
 
-import ProviderInterface from "../Core/ProviderInterface";
-import User from "../Core/User";
+import { BaseProvider } from "../Core/BaseProvider";
+import { User } from "../Core/User";
 
 /**
  * @see [OAuth文档](https://gitee.com/api/v5/oauth_doc)
  */
-export default class Gitee extends ProviderInterface
+export default class Gitee extends BaseProvider
 {
   public static NAME: string = 'gitee';
   protected _scopes: string[] = ['user_info'];
 
 
-  protected getAuthUrl(): string
+  getAuthUrl(): string
   {
     return this.buildAuthUrlFromBase('https://gitee.com/oauth/authorize');
   }
 
-  protected getTokenUrl(): string
+  getTokenUrl(): string
   {
     return 'https://gitee.com/oauth/token';
   }
 
-  protected async getUserByToken(token: string): Promise<object>
+  async getUserByToken(token: string): Promise<Record<string, any>>
   {
     let response = await this.doRequest({
       url: 'https://gitee.com/api/v5/user',
@@ -36,7 +36,7 @@ export default class Gitee extends ProviderInterface
     return data;
   }
 
-  protected mapUserToObject(user: object): User
+  mapUserToObject(user: Record<string, any>): User
   {
     return new User({
       id: user['id'] || null,
@@ -47,7 +47,7 @@ export default class Gitee extends ProviderInterface
     });
   }
 
-  protected getTokenFields(code: string): object
+  protected getTokenFields(code: string): Record<string, any>
   {
     return {
       client_id: this.getClientId(),

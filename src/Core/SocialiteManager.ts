@@ -1,8 +1,7 @@
 'use strict';
 
-import { SupportProviders, ProviderConstructable, ProviderConfig, SocialiteConfig, ResolvedProviders, CustomProviderCreators, ProviderCreator } from "../Types/global";
-import Config from "./Config";
-import ProviderInterface from "./ProviderInterface";
+import { Config } from "./Config";
+import { BaseProvider } from "./BaseProvider";
 import Github from "../Providers/Github";
 import WeChat from "../Providers/WeChat";
 import WeWork from "../Providers/WeWork";
@@ -14,7 +13,7 @@ import Taobao from "../Providers/Taobao";
 import Gitee from "../Providers/Gitee";
 import Coding from "../Providers/Coding";
 
-export default class SocialiteManager
+export class SocialiteManager
 {
   protected config: Config = null;
   protected resolved: ResolvedProviders = {};
@@ -94,10 +93,10 @@ export default class SocialiteManager
 
   isValidProvider(provider: string | ProviderInterface): boolean
   {
-    return (typeof provider == 'string' && typeof this.providers[provider] != 'undefined') || provider instanceof ProviderInterface;
+    return (typeof provider == 'string' && typeof this.providers[provider] != 'undefined') || provider instanceof BaseProvider;
   }
 
-  getResolvedProviders(): object
+  getResolvedProviders(): Record<string, any>
   {
     return this.resolved;
   }

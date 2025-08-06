@@ -3,7 +3,7 @@
 /**
  * OAuth授权后的用户对象
  */
-export default class User
+export class User implements UserInterface
 {
   /**
    * 供应商标识
@@ -32,7 +32,7 @@ export default class User
   /**
    * 原始数据
    */
-  raw: object = null;
+  raw: Record<string, any> = null;
   /**
    * AccessToken
    */
@@ -94,7 +94,7 @@ export default class User
   /**
    * 获取原始数据
    */
-  getRaw(): object
+  getRaw(): Record<string, any>
   {
     return this.raw;
   }
@@ -102,7 +102,7 @@ export default class User
   /**
    * 设置原始数据
    */
-  setRaw(raw: object): this
+  setRaw(raw: Record<string, any>): this
   {
     this.raw = raw;
     return this;

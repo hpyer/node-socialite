@@ -1,13 +1,13 @@
 'use strict';
 
-import ProviderInterface from "../Core/ProviderInterface";
-import User from "../Core/User";
+import { BaseProvider } from "../Core/BaseProvider";
+import { User } from "../Core/User";
 import { merge } from "../Core/Utils";
 
 /**
  * @see [OAuth2.0简介](https://wiki.connect.qq.com/oauth2-0%E7%AE%80%E4%BB%8B)
  */
-export default class QQ extends ProviderInterface
+export default class QQ extends BaseProvider
 {
   public static NAME: string = 'qq';
   protected _baseUrl: string = 'https://graph.qq.com';
@@ -20,24 +20,24 @@ export default class QQ extends ProviderInterface
     return this;
   }
 
-  protected getAuthUrl(): string
+  getAuthUrl(): string
   {
     return this.buildAuthUrlFromBase(`${this._baseUrl}/oauth2.0/authorize`);
   }
 
-  protected getTokenUrl(): string
+  getTokenUrl(): string
   {
     return `${this._baseUrl}/oauth2.0/token`;
   }
 
-  protected getTokenFields(code: string): object
+  protected getTokenFields(code: string): Record<string, any>
   {
     let fields = super.getTokenFields(code);
     fields['grant_type'] = 'authorization_code';
     return fields;
   }
 
-  async tokenFromCode(code: string): Promise<object>
+  async tokenFromCode(code: string): Promise<Record<string, any>>
   {
     let params = this.getTokenFields(code);
     params['fmt'] = 'json';
@@ -51,7 +51,7 @@ export default class QQ extends ProviderInterface
     return this.normalizeAccessTokenResponse(response);
   }
 
-  protected async getUserByToken(token: string): Promise<object>
+  async getUserByToken(token: string): Promise<Record<string, any>>
   {
     let params = {
       fmt: 'json',
@@ -87,7 +87,7 @@ export default class QQ extends ProviderInterface
     });
   }
 
-  protected mapUserToObject(user: object): User
+  mapUserToObject(user: Record<string, any>): User
   {
     return new User({
       id: user['openid'] || null,

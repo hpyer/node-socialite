@@ -1,12 +1,11 @@
 'use strict';
 
-import { SocialiteConfig } from "../Types/global";
 import { merge } from "./Utils";
 
 /**
  * 配置对象
  */
-export default class Config
+export class Config
 {
   protected config: SocialiteConfig = {};
 
@@ -46,7 +45,7 @@ export default class Config
     }
   }
 
-  set(key: string, value: any): object
+  set(key: string, value: any): Record<string, any>
   {
     if (!key) {
       throw new Error('Invalid config key.');

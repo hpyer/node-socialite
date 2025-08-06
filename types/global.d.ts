@@ -1,25 +1,95 @@
 
-import ProviderInterface from '../Core/ProviderInterface';
+declare interface UserInterface {
 
-export declare interface ProviderConstructable {
-  new(config: object): ProviderInterface;
+  /**
+   * 供应商标识
+   */
+  provider: string;
+  /**
+   * openid
+   */
+  id: string;
+  /**
+   * 昵称
+   */
+  nickname: string;
+  /**
+   * 昵称
+   */
+  name: string;
+  /**
+   * 头像
+   */
+  avatar: string;
+  /**
+   * E-mail
+   */
+  email: string;
+  /**
+   * 原始数据
+   */
+  raw: Record<string, any>;
+  /**
+   * AccessToken
+   */
+  access_token: string;
+  /**
+   * RefreshToken
+   */
+  refresh_token: string;
+  /**
+   * ExpiresIn
+   */
+  expires_in: number;
+
+}
+
+/**
+ * 供应商接口
+ */
+declare interface ProviderInterface {
+  /**
+   * 返回生成的授权地址
+   */
+  getAuthUrl: () => string;
+
+  /**
+   * 返回获取token的接口地址
+   */
+  getTokenUrl: () => string;
+
+  /**
+   * 根据token获取用户信息
+   * @param token tokenFromCode() 方法获取到的 token
+   */
+  getUserByToken: (token: string) => Promise<Record<string, any>>;
+
+  /**
+   * 将用户信息映射为用户对象
+   * @param data getUserByToken() 方法获取到的用户信息
+   */
+  mapUserToObject: (data: Record<string, any>) => UserInterface;
+}
+
+declare interface ProviderConstructable {
+  new(config: ProviderConfig): ProviderInterface;
 }
 
 /**
  * 本工具支持的服务商映射表，键名为服务商标识，键值为服务商类
  */
-export declare interface SupportProviders {
+declare interface SupportProviders {
   [key: string]: ProviderConstructable;
 }
 
 /**
  * 已解析的服务商映射表，键名为服务商标识，键值为服务商实例
  */
-export declare interface ResolvedProviders {
+declare interface ResolvedProviders {
   [key: string]: ProviderInterface;
 }
 
-export declare interface ProviderConfig {
+declare interface ProviderConfig {
   /**
    * 服务商，支持3种方法
    *
@@ -65,26 +135,26 @@ export declare interface ProviderConfig {
  * 键名为服务商的标识，如果需要管理同一个服务商的不同应用，
  * 则键名可以用作别名，但同时配置中的 provider 属性必填
  */
-export declare interface SocialiteConfig {
+declare interface SocialiteConfig {
   [key: string]: ProviderConfig;
 }
 
 /**
  * 自定义服务商创建方法映射表，键名为服务商标识，键值为对应的创建方法
  */
-export declare interface CustomProviderCreators {
+declare interface CustomProviderCreators {
   [key: string]: ProviderCreator;
 }
 
 /**
  * 服务商创建方法
  */
-export declare type ProviderCreator = (ProviderConfig) => ProviderInterface;
+declare type ProviderCreator = (config: ProviderConfig) => ProviderInterface;
 
 /**
  * 微信组件配置
  */
-export declare interface WechatComponent {
+declare interface WechatComponent {
   id: string;
   token: string;
 }
@@ -92,7 +162,7 @@ export declare interface WechatComponent {
 /**
  * 微信组件配置选项
  */
-export declare interface WechatComponentConfig {
+declare interface WechatComponentConfig {
   id?: string;
   app_id?: string;
   component_app_id?: string;

@@ -1,14 +1,13 @@
 'use strict';
 
-import ProviderInterface from "../Core/ProviderInterface";
-import User from "../Core/User";
+import { BaseProvider } from "../Core/BaseProvider";
+import { User } from "../Core/User";
 import { buildQueryString, merge } from "../Core/Utils";
-import { ProviderConfig } from "../Types/global";
 
 /**
  * @see [网页授权登录](https://developer.work.weixin.qq.com/document/path/91119)
  */
-export default class OpenWeWork extends ProviderInterface
+export default class OpenWeWork extends BaseProvider
 {
   public static NAME: string = 'open-wework';
   protected _detailed: boolean = false;
@@ -122,7 +121,7 @@ export default class OpenWeWork extends ProviderInterface
     return data['suite_access_token'];
   }
 
-  protected async getUser(token: string, code: string): Promise<object>
+  protected async getUser(token: string, code: string): Promise<Record<string, any>>
   {
     let response = await this.doRequest({
       url: this._baseUrl + '/cgi-bin/service/getuserinfo3rd',
@@ -142,7 +141,7 @@ export default class OpenWeWork extends ProviderInterface
     return data;
   }
 
-  protected async getUserByTicket(userTicket: string): Promise<object>
+  protected async getUserByTicket(userTicket: string): Promise<Record<string, any>>
   {
     let response = await this.doRequest({
       url: this._baseUrl + '/cgi-bin/service/getuserdetail3rd',
@@ -161,7 +160,7 @@ export default class OpenWeWork extends ProviderInterface
     return data;
   }
 
-  public getAuthUrl(): string
+  getAuthUrl(): string
   {
     if (this._asQrcode) {
       let query = {
@@ -194,17 +193,17 @@ export default class OpenWeWork extends ProviderInterface
     return 'https://open.weixin.qq.com/connect/oauth2/authorize?' + buildQueryString(query) + '#wechat_redirect';
   }
 
-  protected getTokenUrl(): string
+  getTokenUrl(): string
   {
     return '';
   }
 
-  protected async getUserByToken(token: string): Promise<object>
+  async getUserByToken(token: string): Promise<Record<string, any>>
   {
     throw new Error(`Open WeWork doesn't support access_token mode.`);
   }
 
-  protected mapUserToObject(user: object): User
+  mapUserToObject(user: Record<string, any>): User
   {
     if (this._detailed) {
       return new User({

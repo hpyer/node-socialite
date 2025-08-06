@@ -1,13 +1,13 @@
 'use strict';
 
-import ProviderInterface from "../Core/ProviderInterface";
-import User from "../Core/User";
+import { BaseProvider } from "../Core/BaseProvider";
+import { User } from "../Core/User";
 import { merge } from "../Core/Utils";
 
 /**
  * @see [WEB 授权说明](https://open.douyin.com/platform/doc/6852243568711583752)
  */
-export default class DouYin extends ProviderInterface
+export default class DouYin extends BaseProvider
 {
   public static NAME: string = 'douyin';
   protected _baseUrl: string = 'https://open.douyin.com';
@@ -20,12 +20,12 @@ export default class DouYin extends ProviderInterface
     return this;
   }
 
-  protected getAuthUrl(): string
+  getAuthUrl(): string
   {
     return this.buildAuthUrlFromBase(`${this._baseUrl}/platform/oauth/connect/`);
   }
 
-  protected getCodeFields(): object
+  protected getCodeFields(): Record<string, any>
   {
     let fields = merge({
       client_key: this.getClientId(),
@@ -39,12 +39,12 @@ export default class DouYin extends ProviderInterface
     return fields;
   }
 
-  protected getTokenUrl(): string
+  getTokenUrl(): string
   {
     return `${this._baseUrl}/oauth/access_token/`;
   }
 
-  protected getTokenFields(code: string): object
+  protected getTokenFields(code: string): Record<string, any>
   {
     return {
       client_key: this.getClientId(),
@@ -54,7 +54,7 @@ export default class DouYin extends ProviderInterface
     };
   }
 
-  async tokenFromCode(code: string): Promise<object>
+  async tokenFromCode(code: string): Promise<Record<string, any>>
   {
     let params = this.getTokenFields(code);
     let response = await this.doRequest({
@@ -73,7 +73,7 @@ export default class DouYin extends ProviderInterface
     return this.normalizeAccessTokenResponse(response.data.data);
   }
 
-  protected async getUserByToken(token: string): Promise<object>
+  async getUserByToken(token: string): Promise<Record<string, any>>
   {
     if (!this._openId) {
       throw new Error('Please set open_id before your query.');
@@ -90,7 +90,7 @@ export default class DouYin extends ProviderInterface
     return response.data.data || {};
   }
 
-  protected mapUserToObject(user: object): User
+  mapUserToObject(user: Record<string, any>): User
   {
     return new User({
       id: user['open_id'] || null,

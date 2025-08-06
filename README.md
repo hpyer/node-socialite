@@ -133,12 +133,12 @@ let appBar = manager.create('bar');
 
 #### 添加自定义服务商
 
-如果本工具包中没有您需要服务商，您可以继承 `ProviderInterface` 这个抽象类，实现其中的 `getAuthUrl`、`getTokenUrl`、`getUserByToken`、`mapUserToObject` 四个方法，然后将您的服务商类添加到工具包中即可。
+如果本工具包中没有您需要服务商，您可以继承 `BaseProvider` 这个抽象类，实现其中的 `getAuthUrl`、`getTokenUrl`、`getUserByToken`、`mapUserToObject` 四个方法，然后将您的服务商类添加到工具包中即可。
 
 ```js
-const { SocialiteManager, ProviderInterface, User } = require('node-socialite');
+const { SocialiteManager, BaseProvider, User } = require('node-socialite');
 
-class MyProvider extends ProviderInterface {
+class MyProvider extends BaseProvider {
   /**
    * 返回生成的授权地址
    * @return {string}

@@ -1,13 +1,12 @@
 'use strict';
 
-import ProviderInterface from "../Core/ProviderInterface";
-import User from "../Core/User";
-import { ProviderConfig } from "../Types/global";
+import { BaseProvider } from "../Core/BaseProvider";
+import { User } from "../Core/User";
 
 /**
  * @see [OAuth认证](https://coding.net/help/openapi)
  */
-export default class Coding extends ProviderInterface
+export default class Coding extends BaseProvider
 {
   public static NAME: string = 'coding';
   protected _scopes: string[] = ['user', 'user:email'];
@@ -26,17 +25,17 @@ export default class Coding extends ProviderInterface
     this.teamUrl = teamUrl.replace(/\/+$/gm, '');
   }
 
-  protected getAuthUrl(): string
+  getAuthUrl(): string
   {
     return this.buildAuthUrlFromBase(`${this.teamUrl}/oauth_authorize.html`);
   }
 
-  protected getTokenUrl(): string
+  getTokenUrl(): string
   {
     return `${this.teamUrl}/api/oauth/access_token`;
   }
 
-  protected async getUserByToken(token: string): Promise<object>
+  async getUserByToken(token: string): Promise<Record<string, any>>
   {
     let response = await this.doRequest({
       url: `${this.teamUrl}/api/me`,
@@ -50,7 +49,7 @@ export default class Coding extends ProviderInterface
     return data;
   }
 
-  protected mapUserToObject(user: object): User
+  mapUserToObject(user: Record<string, any>): User
   {
     return new User({
       id: user['id'] || null,
@@ -61,7 +60,7 @@ export default class Coding extends ProviderInterface
     });
   }
 
-  protected getTokenFields(code: string): object
+  protected getTokenFields(code: string): Record<string, any>
   {
     return {
       client_id: this.getClientId(),

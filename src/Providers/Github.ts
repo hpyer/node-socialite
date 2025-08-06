@@ -1,29 +1,29 @@
 'use strict';
 
-import ProviderInterface from "../Core/ProviderInterface";
-import User from "../Core/User";
+import { BaseProvider } from "../Core/BaseProvider";
+import { User } from "../Core/User";
 import { inArray } from "../Core/Utils";
 
 /**
  * @see [授权 OAuth 应用程序](https://docs.github.com/cn/developers/apps/building-oauth-apps/authorizing-oauth-apps)
  */
-export default class Github extends ProviderInterface
+export default class Github extends BaseProvider
 {
   public static NAME: string = 'github';
   protected _scopes: string[] = ['read:user'];
 
 
-  protected getAuthUrl(): string
+  getAuthUrl(): string
   {
     return this.buildAuthUrlFromBase('https://github.com/login/oauth/authorize');
   }
 
-  protected getTokenUrl(): string
+  getTokenUrl(): string
   {
     return 'https://github.com/login/oauth/access_token';
   }
 
-  protected async getUserByToken(token: string): Promise<object>
+  async getUserByToken(token: string): Promise<Record<string, any>>
   {
     let response = await this.doRequest({
       url: 'https://api.github.com/user',
@@ -38,7 +38,7 @@ export default class Github extends ProviderInterface
     return data;
   }
 
-  protected mapUserToObject(user: object): User
+  mapUserToObject(user: Record<string, any>): User
   {
     return new User({
       id: user['id'] || null,

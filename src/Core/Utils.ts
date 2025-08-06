@@ -32,12 +32,12 @@ export const merge = (target: any, source: any): any => {
   return target;
 }
 
-export const buildQueryString = function (data: object, options: object = {}): string
+export const buildQueryString = function (data: Record<string, any>, options: Record<string, any> = {}): string
 {
   return Qs.stringify(data, options);
 };
 
-export const parseQueryString = function (data: string, options: object = {}): object
+export const parseQueryString = function (data: string, options: Record<string, any> = {}): Record<string, any>
 {
   return Qs.parse(data, options);
 };
