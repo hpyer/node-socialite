@@ -1,5 +1,6 @@
 'use strict';
 
+import '../../types/global.d.ts';
 import { merge } from "./Utils";
 
 /**

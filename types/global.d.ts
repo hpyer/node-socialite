@@ -1,8 +1,11 @@
 
+/**
+ * 授权后用户信息接口
+ */
 declare interface UserInterface {
 
   /**
-   * 供应商标识
+   * 服务商标识
    */
   provider: string;
   /**
@@ -45,7 +48,7 @@ declare interface UserInterface {
 }
 
 /**
- * 供应商接口
+ * 服务商接口
  */
 declare interface ProviderInterface {
   /**
@@ -71,6 +74,9 @@ declare interface ProviderInterface {
   mapUserToObject: (data: Record<string, any>) => UserInterface;
 }
 
+/**
+ * 服务商类（可new的构造函数）
+ */
 declare interface ProviderConstructable {
   new(config: ProviderConfig): ProviderInterface;
 }
@@ -89,6 +95,9 @@ declare interface ResolvedProviders {
   [key: string]: ProviderInterface;
 }
 
+/**
+ * 服务商配置项
+ */
 declare interface ProviderConfig {
   /**
    * 服务商，支持3种方法

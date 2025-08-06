@@ -1,5 +1,6 @@
 'use strict';
 
+import '../../types/global.d.ts';
 import Axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 import { Config } from "./Config";
 import { User } from "./User";

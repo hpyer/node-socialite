@@ -1,5 +1,6 @@
 'use strict';
 
+import '../../types/global.d.ts';
 import { Config } from "./Config";
 import { BaseProvider } from "./BaseProvider";
 import Github from "../Providers/Github";

@@ -1,5 +1,7 @@
 'use strict';
 
+import '../../types/global.d.ts';
+
 /**
  * OAuth授权后的用户对象
  */
