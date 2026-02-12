@@ -1,6 +1,10 @@
 # CHANGELOG
 
 
+## v1.5.3 (2026-02-12)
+
+- Fix: update dependencies
+
 ## v1.5.2 (2025-09-15)
 
 - Fix: 更新依赖包
