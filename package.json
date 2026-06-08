@@ -30,14 +30,14 @@
   "author": "Hpyer",
   "license": "MIT",
   "devDependencies": {
-    "@types/node": "^20.19.40",
-    "mocha": "^11.7.5",
+    "@types/node": "^20.19.42",
+    "mocha": "^11.7.6",
     "package-release": "^1.0.4",
     "sinon": "^12.0.1",
     "typescript": "^5.9.3"
   },
   "dependencies": {
-    "axios": "^1.16.0",
-    "qs": "^6.15.1"
+    "axios": "^1.17.0",
+    "qs": "^6.15.2"
   }
 }
