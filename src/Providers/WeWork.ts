@@ -21,11 +21,11 @@ export class WeWork extends BaseProvider
   {
     super(config);
 
-    if (!this._config.has('base_url')) {
+    if (this._config.has('base_url')) {
       this._baseUrl = this._config.get('base_url');
     }
-    if (!this._config.has('agent_id')) {
-      this._baseUrl = this._config.get('agent_id');
+    if (this._config.has('agent_id')) {
+      this._agentId = this._config.get('agent_id');
     }
   }
 
