@@ -50,11 +50,15 @@ module.exports = class BaseProviderTest {
   mockResponseMulti(responses) {
     for (let i = 0; i < responses.length; i++) {
       let response = responses[i];
-      if (typeof response.body == 'undefined' && typeof response.status == 'undefined' && typeof response.headers == 'undefined') {
+      // 检查是否使用了标准格式（包含 body 字段）
+      // 如果有 body 字段，说明已经是标准格式；否则认为是简写格式（直接的 API 响应数据）
+      if (typeof response.body == 'undefined') {
         response = {
-          body: response,
-          status: 200,
-          headers: null,
+          body: {...response},
+          status: response.status || 200,
+          headers: response.headers || {
+            'content-type': 'application/json',
+          },
         }
       }
       this._request.onCall(i).resolves({
@@ -78,6 +82,7 @@ module.exports = class BaseProviderTest {
    */
   mockRest() {
     this._request.reset();
+    this._request.resetHistory();
   }
 
   /**
@@ -87,12 +92,12 @@ module.exports = class BaseProviderTest {
 
     describe(`Provider: ${this.name}`, () => {
 
-      before(() => {
+      beforeEach(() => {
         this._request = Sinon.stub(axios, 'request');
       });
 
-      after(() => {
-        axios.request.restore();
+      afterEach(() => {
+        this._request.restore();
       });
 
       this.test();
